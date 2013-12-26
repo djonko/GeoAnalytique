@@ -22,6 +22,7 @@ public class Droite extends GeoObject {
     
     public Droite(Point p, double pente,GeoAnalytiqueControleur controleur) {
         // TODO: a completer
+    	super(controleur);//a completer
     }
     
     @Override
