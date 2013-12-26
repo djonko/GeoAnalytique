@@ -52,13 +52,14 @@ public class Point extends GeoObject {
     
     public double calculPente(Point a) {
         // TODO: a completer
-        return 0.0;
+    	return ( this.max(this.y, a.getY()) - this.min(this.y, a.getY()) )/( this.max(this.x, a.getX()) - this.min(this.x, a.getX()) );
+        //return 0.0;
     }
     
-    public boolean equals(Object o) {
+    public boolean equals(Point o) {
         // TODO: a completer
     	boolean t=false;
-    	if(this.x-((Point) o).getX()<=DELTA_PRECISION && this.x-o.getX()>=-1*DELTA_PRECISION)
+    	if(this.x- o.getX()<=DELTA_PRECISION && this.x-o.getX()>=-1*DELTA_PRECISION)
     		if(this.y-o.getY()<=DELTA_PRECISION && this.y-o.getY()>=-1*DELTA_PRECISION)
     			t=true;
         return t;
@@ -84,5 +85,12 @@ public class Point extends GeoObject {
 	@Override
 	public boolean contient(Point p) {
 		return equals(p);
+	}
+	
+	private double max(double a,double b){
+		return (a>=b)?a:b;
+	}
+	private double min(double a,double b){
+		return (a<=b)?a:b;
 	}
 }
