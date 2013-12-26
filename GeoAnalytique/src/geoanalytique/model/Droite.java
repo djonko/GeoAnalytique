@@ -10,7 +10,11 @@ import geoanalytique.exception.VisiteurException;
  */
 
 public class Droite extends GeoObject {
-
+	//les attributs
+	double pente;
+	double ordonnee_origine;
+	
+	
     // Ce constructeur EST INTERDIT d'utilisation
     // PAR CONSEQUENT IL NE FAUT PAS LE MODIFIER
     // OU MIEUX IL FAUT LE SUPPRIMER.
@@ -23,6 +27,8 @@ public class Droite extends GeoObject {
     public Droite(Point p, double pente,GeoAnalytiqueControleur controleur) {
         // TODO: a completer
     	super(controleur);//a completer
+    	this.pente=pente;
+    	this.ordonnee_origine=p.getY()-(p.getX()*this.pente);
     }
     
     @Override
@@ -40,7 +46,11 @@ public class Droite extends GeoObject {
 	@Override
 	public boolean contient(Point p) {
             // TODO: a completer
-            return false;
+		if(((this.pente*p.getX())-p.getY()+this.ordonnee_origine)==0.0)
+			return true;
+		return false;
 	}
+	
+	
     
 }
