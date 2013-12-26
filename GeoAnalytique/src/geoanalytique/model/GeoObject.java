@@ -39,7 +39,7 @@ public abstract class GeoObject {
 
     public String getName() {
         // TODO: a completer
-        return null;
+        return this.name;
     }
     
     
@@ -49,6 +49,7 @@ public abstract class GeoObject {
 
     public void setName (String name) {
         // TODO: a completer
+    	this.name=name;
     }
 
     public abstract boolean contient(Point p);
