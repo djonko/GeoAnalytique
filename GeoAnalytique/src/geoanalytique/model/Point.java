@@ -57,7 +57,11 @@ public class Point extends GeoObject {
     
     public boolean equals(Object o) {
         // TODO: a completer
-        return false;
+    	boolean t=false;
+    	if(this.x-o.getX()<=DELTA_PRECISION && this.x-o.getX()>=-1*DELTA_PRECISION)
+    		if(this.y-o.getY()<=DELTA_PRECISION && this.y-o.getY()>=-1*DELTA_PRECISION)
+    			t=true;
+        return t;
     }
    
     public double calculerDistance(Point b) {
@@ -67,6 +71,8 @@ public class Point extends GeoObject {
     
     public void deplacer(double dx, double dy) {
         // TODO: a completer
+    	this.x+=dx;
+    	this.y+=dy;
     }
 
 	@Override
