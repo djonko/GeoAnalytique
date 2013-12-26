@@ -6,7 +6,7 @@ import geoanalytique.gui.GeoAnalytiqueGUI;
 import geoanalytique.model.Point;
 import javax.swing.JFrame;
 
-/**lol
+/**lol de bobdi
  * Classe de lancement principale de l'application.
  * Vous pouvez modifier comme vous voulez ce lanceur minimale.
  * 
