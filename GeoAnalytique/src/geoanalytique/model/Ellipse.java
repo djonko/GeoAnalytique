@@ -4,7 +4,7 @@ import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.exception.VisiteurException;
 
 /** 
- * Modele mathematique pour les ellipses
+ * Modele mathematique pour les ellipses lol
  * 
  */
 public class Ellipse extends Surface {
