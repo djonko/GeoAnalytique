@@ -16,6 +16,7 @@ public abstract class GeoObject {
     private ArrayList<Operation> operations;
     
     private String name;
+    private GeoAnalytiqueControleur controleur;
 
     // Ce constructeur EST INTERDIT d'utilisation
     // PAR CONSEQUENT IL NE FAUT PAS LE MODIFIER
@@ -29,12 +30,15 @@ public abstract class GeoObject {
     public GeoObject (String name,GeoAnalytiqueControleur controleur) {
         operations = new ArrayList<Operation>();
         operations.add(new ChangeNomOperation(this));
+        this.name=name;
+        this.setControleur(controleur);
         // TODO: a completer
     }
     
     public GeoObject (GeoAnalytiqueControleur controleur) {
         this.name = this.getClass().getSimpleName()+(count++);
         // TODO: a completer
+        this.setControleur(controleur);
     }
 
     public String getName() {
@@ -55,5 +59,13 @@ public abstract class GeoObject {
     public abstract boolean contient(Point p);
     
     public abstract <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException;
+
+	public GeoAnalytiqueControleur getControleur() {
+		return controleur;
+	}
+
+	public void setControleur(GeoAnalytiqueControleur controleur) {
+		this.controleur = controleur;
+	}
 }
 

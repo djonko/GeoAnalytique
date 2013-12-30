@@ -8,6 +8,13 @@ import geoanalytique.util.GeoObjectVisitor;
  * 
  */
 public class Cercle extends Ellipse {
+	
+	private Segment rayon;
+	private Point centre;
+	public Cercle(Segment s,Point p){
+		
+	}
+	
         @Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {
             // TODO: a completer

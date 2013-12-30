@@ -52,29 +52,36 @@ public class Point extends GeoObject {
     
     public double calculPente(Point a) {
         // TODO: a completer
-    	return ( this.max(this.y, a.getY()) - this.min(this.y, a.getY()) )/( this.max(this.x, a.getX()) - this.min(this.x, a.getX()) );
-        //return 0.0;
+    	return ( this.y-a.getY() )/( this.x-a.getX() );
     }
     
-    public boolean equals(Point o) {
+    public boolean equals(Object o) {
         // TODO: a completer
     	boolean t=false;
-    	if(this.x- o.getX()<=DELTA_PRECISION && this.x-o.getX()>=-1*DELTA_PRECISION)
-    		if(this.y-o.getY()<=DELTA_PRECISION && this.y-o.getY()>=-1*DELTA_PRECISION)
+    	if(o != null && o instanceof Point){
+    	
+    	if(this.x- ((Point) o).getX()<=DELTA_PRECISION && this.x-((Point) o).getX()>=-1*DELTA_PRECISION)
+    		if(this.y-((Point) o).getY()<=DELTA_PRECISION && this.y-((Point) o).getY()>=-1*DELTA_PRECISION)
     			t=true;
+    	}
         return t;
     }
    
     public double calculerDistance(Point b) {
         // TODO: a completer
-    	return Math.sqrt((x-b.x)*(x-b.x)+(y-b.y)*(y-b.y));
+    	return Math.sqrt((x-b.getX())*(x-b.getX())+(y-b.getY())*(y-b.getY()));
        // return 0.0;
     }
     
     public void deplacer(double dx, double dy) {
         // TODO: a completer
-    	this.x+=dx;
-    	this.y+=dy;
+    	this.setX(this.getX()+dx);
+    	this.setY(this.getY()+dy);
+    	
+    }
+    
+    public Point milieuDeuxPoint(Point p){
+    	return new Point( (this.x+p.getX())/2,(this.y+p.getY())/2,super.getControleur());
     }
 
 	@Override
@@ -87,10 +94,5 @@ public class Point extends GeoObject {
 		return equals(p);
 	}
 	
-	private double max(double a,double b){
-		return (a>=b)?a:b;
-	}
-	private double min(double a,double b){
-		return (a<=b)?a:b;
-	}
+
 }

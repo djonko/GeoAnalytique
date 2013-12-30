@@ -164,6 +164,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             view.getCanvas().clear();
             // redessine toutes les figures
             Dessinateur d = new Dessinateur(viewport);
+           
             for (GeoObject o : objs) {
             	Graphique c;
 		try {

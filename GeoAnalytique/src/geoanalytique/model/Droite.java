@@ -3,6 +3,7 @@ package geoanalytique.model;
 import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
+import geoanalytique.graphique.GCoordonnee;
 
 /**
  * Modele mathematique pour les droites
@@ -11,8 +12,8 @@ import geoanalytique.exception.VisiteurException;
 
 public class Droite extends GeoObject {
 	//les attributs
-	double pente;
-	double ordonnee_origine;
+	public double pente;
+	public Point p;
 	
 	
     // Ce constructeur EST INTERDIT d'utilisation
@@ -26,14 +27,19 @@ public class Droite extends GeoObject {
     
     public Droite(Point p, double pente,GeoAnalytiqueControleur controleur) {
         // TODO: a completer
+    	
     	super(controleur);//a completer
     	this.pente=pente;
-    	this.ordonnee_origine=p.getY()-(p.getX()*this.pente);
+    	this.p=p;
+    	
     }
     
     @Override
     public boolean equals(Object o) {
         // TODO: a completer
+    	if(o != null && o instanceof Droite)
+    		return this.contient(((Droite) o).p) && ((Droite) o).contient(this.p);
+    	else
         return false;
     }
     
@@ -46,9 +52,8 @@ public class Droite extends GeoObject {
 	@Override
 	public boolean contient(Point p) {
             // TODO: a completer
-		if(((this.pente*p.getX())-p.getY()+this.ordonnee_origine)==0.0)
-			return true;
-		return false;
+		return (this.p.calculPente(p)==this.pente)?true:false;
+		
 	}
 	
 	

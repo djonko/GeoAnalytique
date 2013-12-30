@@ -35,7 +35,11 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 	 */
 	public Graphique visitDroite(Droite d) throws VisiteurException {
             // TODO: a completer
-            return null;
+		GCoordonnee c=(GCoordonnee) this.visitPoint(d.p);
+		int ymax=c.getY()+((int)d.pente*(viewport.getLargeur()- c.getX()));
+		int ymin=c.getY()-((int)d.pente* c.getX());
+		return new GLigne(viewport.getLargeur(),ymax,0,ymin);
+            //return null;
 	}
 
 	/**
@@ -67,6 +71,9 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 	 */
 	public Graphique visitSegment(Segment s) throws VisiteurException {
             // TODO: a completer
-            return null;
+		Graphique c=this.visitPoint(s.getP1());
+		Graphique c2=this.visitPoint(s.getP2());
+		return new GLigne(((GCoordonnee) c).getX(),((GCoordonnee) c).getY(),((GCoordonnee) c2).getX(),((GCoordonnee) c2).getY());
+           // return null;
 	}
 }
