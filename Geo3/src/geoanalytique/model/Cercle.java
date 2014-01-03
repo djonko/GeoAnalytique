@@ -1,5 +1,6 @@
 package geoanalytique.model;
  
+import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
 import geoanalytique.util.GeoObjectVisitor;
 
@@ -9,10 +10,12 @@ import geoanalytique.util.GeoObjectVisitor;
  */
 public class Cercle extends Ellipse {
 	
-	private Segment rayon;
-	private Point centre;
-	public Cercle(Segment s,Point p){
+	public Cercle(Point c,Segment r1,Segment r2,GeoAnalytiqueControleur controleur){
+		super(c,r1,r2,controleur);
 		
+	}
+	public Cercle(String Name,Point c,Segment r1,Segment r2,GeoAnalytiqueControleur controleur){
+		super(Name,c,r1,r2,controleur);	
 	}
 	
         @Override

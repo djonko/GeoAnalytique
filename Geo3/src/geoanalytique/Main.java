@@ -2,8 +2,9 @@ package geoanalytique;
  
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.gui.GeoAnalytiqueGUI;
-
 import geoanalytique.model.Point;
+import geoanalytique.model.Segment;
+
 import javax.swing.JFrame;
 
 /**lol de bobdi
@@ -30,6 +31,9 @@ public class Main {
         
         // Petit exemple
         controleur.addObjet(new Point("Ori", 0,0, controleur));
+        Point p1=new Point(4,3,controleur);
+        Point p2=new Point(2,2,controleur);
+        controleur.addObjet(p1);
     	
     	frame.setVisible(true);
     	

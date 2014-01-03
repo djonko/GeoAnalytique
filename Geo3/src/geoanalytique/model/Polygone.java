@@ -11,8 +11,12 @@ import java.util.Collection;
  * 
  */
 public abstract class Polygone extends Surface {
+	Collection<Point> controles;
+	
 
     public Polygone (Collection<Point> controles,GeoAnalytiqueControleur controleur) {
+    	super(controleur);
+    	this.controles=controles;
     	// TODO: a completer
     }
     
