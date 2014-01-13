@@ -10,18 +10,19 @@ import geoanalytique.util.GeoObjectVisitor;
  */
 public class Cercle extends Ellipse {
 	
-	public Cercle(Point c,Segment r1,Segment r2,GeoAnalytiqueControleur controleur){
-		super(c,r1,r2,controleur);
+	public Cercle(Point c,Point p1,GeoAnalytiqueControleur controleur){
+		super(c,p1,new Point((p1.getY()-c.getY())+c.getX(),p1.getY(),null),controleur);
 		
 	}
-	public Cercle(String Name,Point c,Segment r1,Segment r2,GeoAnalytiqueControleur controleur){
-		super(Name,c,r1,r2,controleur);	
+	public Cercle(String Name,Point c,Point p1,GeoAnalytiqueControleur controleur){
+		super(Name,c,p1,new Point(p1.getX(),(p1.getX()-c.getX())+c.getY(),null),controleur);	
 	}
 	
         @Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {
             // TODO: a completer
-            return null;
+        	return obj.visitEllipse(this);
+           // return null;
 	}
 
 	@Override

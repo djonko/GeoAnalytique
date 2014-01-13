@@ -46,7 +46,7 @@ public class Droite extends GeoObject {
    	@Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {
             // TODO: a completer
-            return null;
+   		return obj.visitDroite(this);
 	}
 
 	@Override

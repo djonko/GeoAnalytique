@@ -45,7 +45,7 @@ public class Segment extends Droite {
     @Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {
             // TODO: a completer
-            return null;
+    	return obj.visitSegment(this);
 	}
 
 	public Point getP1() {

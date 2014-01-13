@@ -14,13 +14,15 @@ public class GLigne extends Graphique {
     private int y2;
     public GLigne(int x1, int y1, int x2, int y2) {
         // TODO: a completer
+    	super.color=Color.BLUE;
     	this.x1=x1;this.x2=x2;this.y1=y1;this.y2=y2;
-    	color=Color.BLUE;
+    	
     }
     
     public GLigne(int x1, int y1, int x2, int y2, Color color) {
         // TODO: a completer
-    	this.x1=x1;this.x2=x2;this.y1=y1;this.y2=y2;this.color=color;
+    	super.setCouleur(color);
+    	this.x1=x1;this.x2=x2;this.y1=y1;this.y2=y2;
     }
     
     @Override

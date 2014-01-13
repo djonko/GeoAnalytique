@@ -48,8 +48,7 @@ public class ChangeNomOperation implements Operation {
 	/**
 	 * @see geoanalytique.util.Operation#getDescriptionArgument(int)
 	 */
-	public String getDescriptionArgument(int num)
-			throws ArgumentOperationException {
+	public String getDescriptionArgument(int num) throws ArgumentOperationException {
 		return "Nouveau nom de l'object";
 	}
 

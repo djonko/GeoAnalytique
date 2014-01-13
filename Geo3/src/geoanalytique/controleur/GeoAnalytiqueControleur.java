@@ -5,7 +5,10 @@ import geoanalytique.exception.IncorrectTypeOperationException;
 import geoanalytique.exception.VisiteurException;
 import geoanalytique.graphique.Graphique;
 import geoanalytique.gui.GeoAnalytiqueGUI;
+import geoanalytique.model.Droite;
 import geoanalytique.model.GeoObject;
+import geoanalytique.model.Point;
+import geoanalytique.model.Segment;
 import geoanalytique.model.ViewPort;
 import geoanalytique.util.Dessinateur;
 import geoanalytique.util.Operation;
@@ -48,7 +51,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		objs = new ArrayList<GeoObject>();
 		this.view = view;
 		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getWidth());
+		viewport.resize(600, 600);
 		// TODO: A completer avec vos modifications
+		
+		
 	}
 
         /**
@@ -74,6 +80,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          */
 	public void update(GeoObject object) {
 		// TODO: a completer
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -164,10 +171,15 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             view.getCanvas().clear();
             // redessine toutes les figures
             Dessinateur d = new Dessinateur(viewport);
-           
+            Point p=new Point(0,0,this);
+            Droite droite=new Droite(p,90,this);
+            Droite droite2=new Droite(p,0,this);
             for (GeoObject o : objs) {
             	Graphique c;
 		try {
+			
+			view.getCanvas().addGraphique(d.visitDroite(droite));
+			view.getCanvas().addGraphique(d.visitDroite(droite2));
                     c = o.visitor(d);
                     view.getCanvas().addGraphique(c);
                 } catch (VisiteurException e) {
@@ -177,6 +189,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             
             view.getCanvas().repaint();
             // TODO: a completer
+            
 	}
 
 	

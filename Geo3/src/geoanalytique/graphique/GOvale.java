@@ -28,6 +28,16 @@ public class GOvale extends Graphique {
 		this.color=color;
 		
 	}
+	
+	public GOvale(int x,int y,int w,int h) {
+        // TODO: a completer
+	this.x=x;
+	this.y=y;
+	this.w=w;
+	this.h=h;
+	this.color=Color.BLUE;
+	
+}
 
 	/**
 	 * @see geoanalytique.graphique.Graphique#paint(java.awt.Graphics)

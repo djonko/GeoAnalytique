@@ -38,6 +38,7 @@ public class GCoordonnee extends Graphique {
 	}
 	
 	
+	
 
 	@Override
 	public boolean equals(Object o) {

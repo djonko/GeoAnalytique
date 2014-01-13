@@ -6,9 +6,14 @@
 package geoanalytique.gui;
 
 import geoanalytique.view.GeoAnalytiqueView;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  * Classe representant l'interface graphique principale.
@@ -24,8 +29,12 @@ public class GeoAnalytiqueGUI extends JPanel {
        grille = new GeoAnalytiqueView();
        
        // TODO: a modifier!!!
+       //this.setLayout(new FlowLayout());
+       //
        this.setLayout(new BorderLayout());
+       
        this.add(grille);
+       this.setBackground(Color.magenta);
        // TODO: a completer
    }
    
@@ -35,6 +44,7 @@ public class GeoAnalytiqueGUI extends JPanel {
     
     public Container getPanelElements() {
     	// TODO: a completer
+    	
         return null;
     }
     

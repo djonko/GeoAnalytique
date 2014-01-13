@@ -10,30 +10,35 @@ import geoanalytique.exception.VisiteurException;
  */
 public class Ellipse extends Surface {
    
-	private Segment r1;
-	private Segment r2;
+	private Point p1;
+	private Point p2;
 	private Point centre;
 	
-	public Ellipse(Point c,Segment r1,Segment r2,GeoAnalytiqueControleur controleur){
+	public Ellipse(Point c,Point p1,Point p2,GeoAnalytiqueControleur controleur){
 		super(controleur);
-		this.r1=r1;
-		this.r2=r2;
 		this.centre=c;
+		this.setP1(p1);
+		this.setP2(p2);
+		this.p1.setX(this.centre.getX());
+		this.p2.setY(this.centre.getY());
+		
 	}
 	
-	public Ellipse(String Name,Point c,Segment r1,Segment r2,GeoAnalytiqueControleur controleur){
+	public Ellipse(String Name,Point c,Point p1,Point p2,GeoAnalytiqueControleur controleur){
 		super(Name,controleur);
-		this.r1=r1;
-		this.r2=r2;
 		this.centre=c;
+		this.setP1(p1);
+		this.setP2(p2);
+		this.p1.setX(this.centre.getX());
+		this.p2.setY(this.centre.getY());
 		
 	}
 
     @Override
     public double calculerAire() {
         // TODO: a completer
-        //throw new UnsupportedOperationException("Not supported yet.");
-    	return Math.PI*this.r1.getLong()*this.r2.getLong();
+        throw new UnsupportedOperationException("Not supported yet.");
+    	//return Math.PI*this.r1.getLong()*this.r2.getLong();
         
     }
 
@@ -42,8 +47,8 @@ public class Ellipse extends Surface {
     public boolean equals(Object o) {
         // TODO: a completer
     	if(o!=null && o instanceof Ellipse){
-    		Ellipse E=(Ellipse)o;
-    		return(this.r1.equals(o) && this.r2.equals(o));
+    		//return(this.r1.equals(o) && this.r2.equals(o) && this.centre.equals(o));
+    		return false;
     	}else
         return false;
     }
@@ -57,7 +62,8 @@ public class Ellipse extends Surface {
     @Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {
             // TODO: a completer
-            return null;
+    	return obj.visitEllipse(this);
+            //return null;
 	}
 
     @Override
@@ -67,30 +73,32 @@ public class Ellipse extends Surface {
     }
 
 
-	public Segment getR1() {
-		return r1;
-	}
+	
 
 
-	public void setR1(Segment r1) {
-		this.r1 = r1;
-	}
-
-
-	public Segment getR2() {
-		return r2;
-	}
-
-
-	public void setR2(Segment r2) {
-		this.r2 = r2;
-	}
+	
 
 	public Point getCentre() {
-		return centre;
+		return this.centre;
 	}
 
 	public void setCentre(Point centre) {
 		this.centre = centre;
+	}
+
+	public Point getP1() {
+		return p1;
+	}
+
+	public void setP1(Point p1) {
+		this.p1 = p1;
+	}
+
+	public Point getP2() {
+		return p2;
+	}
+
+	public void setP2(Point p2) {
+		this.p2 = p2;
 	}
 }
