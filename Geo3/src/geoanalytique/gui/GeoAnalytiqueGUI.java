@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 
+import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -27,15 +28,19 @@ public class GeoAnalytiqueGUI extends JPanel {
    
    public GeoAnalytiqueGUI() {
        grille = new GeoAnalytiqueView();
-       
        // TODO: a modifier!!!
        //this.setLayout(new FlowLayout());
+       
        //
-       this.setLayout(new BorderLayout());
+       this.setLayout(new BorderLayout(300,300));
+       
+       
+ 
        
        this.add(grille);
-       this.setBackground(Color.magenta);
+       
        // TODO: a completer
+  
    }
    
    public GeoAnalytiqueView getCanvas() {

@@ -36,13 +36,13 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 	 */
 	public Graphique visitDroite(Droite d) throws VisiteurException {
             // TODO: a completer
-		double yma=d.p.getY()+ (d.pente *(viewport.getXMax()-d.p.getX()));
-		double ymi=d.p.getY()- (d.pente *(viewport.getXMin()-d.p.getX()));
+		//double yma=d.p.getY()+ (d.pente *(viewport.getXMax()-d.p.getX()));
+		//double ymi=d.p.getY()- (d.pente *(viewport.getXMin()-d.p.getX()));
 		
 		GCoordonnee c=(GCoordonnee) this.visitPoint(d.p);
 		int ymax=c.getY()+((int)d.pente*(viewport.getLargeur()- c.getX()));
 		int ymin=c.getY()-((int)d.pente* c.getX());
-		System.out.println(""+ymax+" le min "+ymin+" largeur "+viewport.getLargeur());
+		//System.out.println(""+ymax+" le min "+ymin+" largeur "+viewport.getLargeur());
 		return new GLigne(0,ymin,viewport.getLargeur(),ymax);
 		
             //return null;

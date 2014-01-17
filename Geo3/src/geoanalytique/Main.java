@@ -1,5 +1,6 @@
 package geoanalytique;
  
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import geoanalytique.controleur.GeoAnalytiqueControleur;
@@ -7,7 +8,11 @@ import geoanalytique.gui.GeoAnalytiqueGUI;
 import geoanalytique.model.*;
 import geoanalytique.model.geoobject.operation.MediatriceOperation;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 
 /**lol de bobdi
  * Classe de lancement principale de l'application.
@@ -19,24 +24,30 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+  
+	public static void main(String[] args) {
     	GeoAnalytiqueGUI panel = new GeoAnalytiqueGUI();
+    	JPanel pan=new JPanel(new BorderLayout());
     	
     	JFrame frame = new JFrame("GeoAnalytique - version 0.01");
-    
-    	frame.setContentPane(panel);
     	
-    	//frame.getContentPane().add(panel);
-    	frame.setSize(800, 800);
+    	// example du prof
+    	frame.add(pan);
+    	pan.add(panel);
+    	frame.getContentPane().add(pan);
+    	frame.setSize(1024,778);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	Menu menu=new Menu();
     	frame.setJMenuBar(menu.setMenu());
     	//frame.pack();
+    	//frame.setVisible(true);
+    	
+
     	
     	
     	GeoAnalytiqueControleur controleur = new GeoAnalytiqueControleur(panel);
     	controleur.prepareTout();
-        
+    	//frame.PanelGraphiq.add(panel);
         // Petit exemple
         //controleur.addObjet(new Point("Ori",0,0, controleur));
         Point c=new Point("Ori", 6,6, controleur);

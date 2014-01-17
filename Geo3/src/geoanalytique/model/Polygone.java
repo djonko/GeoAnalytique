@@ -21,6 +21,8 @@ public abstract class Polygone extends Surface {
     }
     
     public Polygone (String name,Collection<Point> controles,GeoAnalytiqueControleur controleur) {
+    	super(name,controleur);
+    	this.controles=controles;
         // TODO: a completer
     }
 
@@ -35,7 +37,8 @@ public abstract class Polygone extends Surface {
     @Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {
             // TODO: a completer
-        return null;
+    	return obj.visitPolygone(this);
+        //return null;
 	}
 }
 

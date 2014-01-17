@@ -13,6 +13,7 @@ import geoanalytique.model.ViewPort;
 import geoanalytique.util.Dessinateur;
 import geoanalytique.util.Operation;
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +52,9 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		objs = new ArrayList<GeoObject>();
 		this.view = view;
 		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getWidth());
-		viewport.resize(600, 600);
+		viewport.resize(600,600);
+		
+		
 		// TODO: A completer avec vos modifications
 		
 		
@@ -80,6 +83,9 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          */
 	public void update(GeoObject object) {
 		// TODO: a completer
+		/*objs.remove(object);
+		objs.add();
+		recalculPoints();*/
 		
 	}
 
@@ -177,9 +183,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             for (GeoObject o : objs) {
             	Graphique c;
 		try {
+			d.visitDroite(droite).setCouleur(Color.red);
+			d.visitDroite(droite2).setCouleur(Color.red);
 			
 			view.getCanvas().addGraphique(d.visitDroite(droite));
 			view.getCanvas().addGraphique(d.visitDroite(droite2));
+			
                     c = o.visitor(d);
                     view.getCanvas().addGraphique(c);
                 } catch (VisiteurException e) {
