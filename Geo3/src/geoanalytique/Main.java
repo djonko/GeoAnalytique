@@ -2,10 +2,12 @@ package geoanalytique;
  
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.gui.GeoAnalytiqueGUI;
 import geoanalytique.model.*;
+import geoanalytique.model.geoobject.operation.MedianeOperation;
 import geoanalytique.model.geoobject.operation.MediatriceOperation;
 
 import javax.swing.GroupLayout;
@@ -30,16 +32,17 @@ public class Main {
     	JPanel pan=new JPanel(new BorderLayout());
     	
     	JFrame frame = new JFrame("GeoAnalytique - version 0.01");
-    	
+    	Toolbar toolbar=new Toolbar();
+    	frame.add(toolbar, BorderLayout.EAST);
     	// example du prof
-    	frame.add(pan);
-    	pan.add(panel);
-    	frame.getContentPane().add(pan);
+    	frame.add(panel);
+    	frame.getContentPane().add(panel, java.awt.BorderLayout.CENTER);
+    
     	frame.setSize(1024,778);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	Menu menu=new Menu();
     	frame.setJMenuBar(menu.setMenu());
-    	//frame.pack();
+    	frame.pack();
     	//frame.setVisible(true);
     	
 
@@ -56,8 +59,31 @@ public class Main {
         Cercle e=new Cercle(c,p,controleur);
         Segment s=new Segment(p,p2,controleur);
         Droite mil=(Droite) (new MediatriceOperation(1,s)).calculer();
-        controleur.addObjet(s);
-        controleur.addObjet(mil);
+        
+        ArrayList<Point> ct=new ArrayList<Point>();
+        ct.add(new Point(2,6,controleur));
+        ct.add(new Point(4,6,controleur));
+        ct.add(new Point(4,4,controleur));
+        ct.add(new Point(2,4,controleur));
+        
+        controleur.addObjet(new Point(4,4,controleur));
+        controleur.addObjet(new Point(4,6,controleur));
+        /*
+        ct.add(new Point(2,2,controleur));
+        ct.add(new Point(5,5,controleur));
+        ct.add(new Point(2,3,controleur));
+       */
+        //Polygone PP=new Carre(ct,controleur);
+        //Polygone PP=new Rectangle(ct,controleur);
+        Polygone PP=new Triangle(ct,controleur);
+        Droite mediane =(Droite)(new MedianeOperation(3,PP)).calculer();
+        //Segment mediane =(Segment)(new MedianeOperation(3,PP)).calculer();
+        
+        controleur.addObjet(mediane);
+        controleur.addObjet(PP);
+        //controleur.lanceOperation(s,new MediatriceOperation(2,s));
+       // controleur.addObjet(s);
+       // controleur.addObjet(mil);
         System.out.println(" la pente"+mil.pente);
         controleur.addObjet(p);
         controleur.addObjet(p2);

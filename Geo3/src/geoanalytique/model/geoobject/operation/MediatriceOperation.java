@@ -29,7 +29,7 @@ public class MediatriceOperation implements Operation {
 	@Override
 	public int getArite() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 2;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class MediatriceOperation implements Operation {
 	@Override
 	public Class getClassArgument(int num) {
 		// TODO Auto-generated method stub
-		return Segment.class;
+		return Double.class;
 	}
 	
 	

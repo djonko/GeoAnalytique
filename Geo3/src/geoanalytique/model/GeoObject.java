@@ -4,7 +4,9 @@ import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
 import geoanalytique.model.geoobject.operation.ChangeNomOperation;
+import geoanalytique.model.geoobject.operation.MediatriceOperation;
 import geoanalytique.util.Operation;
+
 import java.util.ArrayList;
 
 /**
@@ -32,6 +34,7 @@ public abstract class GeoObject {
         operations.add(new ChangeNomOperation(this));
         this.name=name;
         this.setControleur(controleur);
+        operations.add(new MediatriceOperation(1,this));
         // TODO: a completer
     }
     

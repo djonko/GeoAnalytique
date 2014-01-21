@@ -35,7 +35,7 @@ public class GOvale extends Graphique {
 	this.y=y;
 	this.w=w;
 	this.h=h;
-	this.color=Color.BLUE;
+	this.color=Color.MAGENTA;
 	
 }
 

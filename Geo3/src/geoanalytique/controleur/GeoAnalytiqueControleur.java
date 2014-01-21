@@ -52,7 +52,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		objs = new ArrayList<GeoObject>();
 		this.view = view;
 		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getWidth());
-		viewport.resize(600,600);
+		//viewport.resize(600,600);
 		
 		
 		// TODO: A completer avec vos modifications

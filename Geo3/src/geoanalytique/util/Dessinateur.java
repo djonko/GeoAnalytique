@@ -1,16 +1,9 @@
 package geoanalytique.util;
  
 import geoanalytique.exception.VisiteurException;
-import geoanalytique.graphique.GCoordonnee;
-import geoanalytique.graphique.GLigne;
-import geoanalytique.graphique.GOvale;
-import geoanalytique.graphique.Graphique;
-import geoanalytique.model.Droite;
-import geoanalytique.model.Ellipse;
-import geoanalytique.model.Point;
-import geoanalytique.model.Polygone;
-import geoanalytique.model.Segment;
-import geoanalytique.model.ViewPort;
+import geoanalytique.graphique.*;
+import geoanalytique.model.*;
+
 
 /**
  * Cette objet est utilise par le presenteur, pour 'convertir' les modeles
@@ -38,11 +31,11 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
             // TODO: a completer
 		//double yma=d.p.getY()+ (d.pente *(viewport.getXMax()-d.p.getX()));
 		//double ymi=d.p.getY()- (d.pente *(viewport.getXMin()-d.p.getX()));
-		
+
 		GCoordonnee c=(GCoordonnee) this.visitPoint(d.p);
 		int ymax=c.getY()+((int)d.pente*(viewport.getLargeur()- c.getX()));
 		int ymin=c.getY()-((int)d.pente* c.getX());
-		//System.out.println(""+ymax+" le min "+ymin+" largeur "+viewport.getLargeur());
+		System.out.println(""+ymax+" le min "+ymin+" largeur "+viewport.getLargeur());
 		return new GLigne(0,ymin,viewport.getLargeur(),ymax);
 		
             //return null;
@@ -87,7 +80,32 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 	 */
 	public Graphique visitPolygone(Polygone p) throws VisiteurException {
             // TODO: a completer
-            return null;
+		GCoordonnee c,c2,c3;
+		Segment s;
+		int tabx[]=null,taby[]=null,taille=0;
+		if(p instanceof Carre || p instanceof Rectangle){
+			//return this.visitSegment(p.getSegment(1));
+			tabx=new int[4];
+			taby=new int[4];
+			taille=4;
+			
+		}else if(p instanceof Triangle){
+			tabx=new int[3];
+			taby=new int[3];
+			taille=3;
+		}
+	if(taille!=0){
+		for(int i=1;i<=taille;i++){
+			s=p.getSegment(i);
+			c=viewport.convert(s.getP1().getX(),s.getP1().getY());
+			//c2=viewport.convert(s.getP2().getX(),s.getP2().getY());
+			//c3=viewport.convert(s.getP1().getX(),s.getP1().getY());
+			tabx[i-1]=c.getX();
+			taby[i-1]=c.getY();
+		}
+		return new GPolygone(tabx,taby,taille);
+	}
+	else return null;
 	}
 
 	/**
