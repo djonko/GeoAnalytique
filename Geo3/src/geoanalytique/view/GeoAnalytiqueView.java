@@ -8,6 +8,7 @@ package geoanalytique.view;
 
 import geoanalytique.graphique.Graphique; 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class GeoAnalytiqueView extends javax.swing.JPanel {
     
     /** Creates new form GeoAnalytiqueView */
     public GeoAnalytiqueView() {
+    	this.setBackground(Color.white);
         initComponents();
         graphiques = new ArrayList<Graphique>();
     }

@@ -37,7 +37,7 @@ public class Main {
     	//frame.add(panel);
     	frame.getContentPane().add(panel, java.awt.BorderLayout.CENTER);
     
-    	frame.setSize(1024,778);
+    	frame.setSize(900,778);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
     	frame.setJMenuBar(panel.menuBar);

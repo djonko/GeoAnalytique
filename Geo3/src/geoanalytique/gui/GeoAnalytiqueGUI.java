@@ -7,6 +7,7 @@ package geoanalytique.gui;
 
 import geoanalytique.view.GeoAnalytiqueView;
 
+import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ import javax.swing.*;
 public class GeoAnalytiqueGUI extends JPanel {
 
    private GeoAnalytiqueView grille;
+   private JPanel panelGrille;
 
 // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnCarre;
@@ -80,7 +82,11 @@ public class GeoAnalytiqueGUI extends JPanel {
        jScrollPaneLog = new javax.swing.JScrollPane();
        textareLog = new javax.swing.JTextArea();
        panelPropriete = new javax.swing.JPanel();
+       
+       panelGrille=new JPanel();
        grille = new GeoAnalytiqueView();
+       
+     
        
        tablepanelGauche = new javax.swing.JTabbedPane();
        panelgauchePro = new javax.swing.JPanel();
@@ -258,19 +264,35 @@ public class GeoAnalytiqueGUI extends JPanel {
 
        jtablePanel.addTab("Propriétés", panelPropriete);
 
-       grille.setBackground(new java.awt.Color(204, 255, 0));
-       grille.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zone de Dessin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
-       grille.setPreferredSize(new java.awt.Dimension(800, 550));
+       panelGrille.setBackground(Color.WHITE);
+       panelGrille.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zone de Dessin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
+       //panelGrille.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+       panelGrille.setPreferredSize(new java.awt.Dimension(800, 550));
 
-       javax.swing.GroupLayout grilleLayout = new javax.swing.GroupLayout(grille);
-       grille.setLayout(grilleLayout);
-       grilleLayout.setHorizontalGroup(
-           grilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+       /*javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
+       panelGrille.setLayout(panelGrilleLayout);
+       panelGrilleLayout.setHorizontalGroup(
+           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGap(0, 688, Short.MAX_VALUE)
        );
-       grilleLayout.setVerticalGroup(
-           grilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+       panelGrilleLayout.setVerticalGroup(
+           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGap(0, 0, Short.MAX_VALUE)
+       );*/
+       javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
+       panelGrille.setLayout(panelGrilleLayout);
+       panelGrilleLayout.setHorizontalGroup(
+           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGrilleLayout.createSequentialGroup()
+               .addContainerGap()
+               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addContainerGap())
+       );
+       panelGrilleLayout.setVerticalGroup(
+           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addGroup(panelGrilleLayout.createSequentialGroup()
+               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addContainerGap())
        );
 
        panelgauchePro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -301,7 +323,7 @@ public class GeoAnalytiqueGUI extends JPanel {
                        .addComponent(jtablePanel)
                        .addGap(10, 10, 10))
                    .addGroup(jpanelContainerLayout.createSequentialGroup()
-                       .addComponent(grille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                       .addComponent(panelGrille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                        .addComponent(tablepanelGauche))))
        );
@@ -313,7 +335,7 @@ public class GeoAnalytiqueGUI extends JPanel {
                .addGroup(jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                    .addGroup(jpanelContainerLayout.createSequentialGroup()
                        .addGroup(jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addComponent(panelGrille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
                            .addComponent(tablepanelGauche))
                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                        .addComponent(jtablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))

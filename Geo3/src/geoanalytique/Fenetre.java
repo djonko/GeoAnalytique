@@ -45,6 +45,7 @@ public class Fenetre extends javax.swing.JFrame {
         textareLog = new javax.swing.JTextArea();
         panelPropriete = new javax.swing.JPanel();
         panelDessin = new javax.swing.JPanel();
+        grille = new javax.swing.JPanel();
         tablepanelGauche = new javax.swing.JTabbedPane();
         panelgauchePro = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
@@ -233,15 +234,34 @@ public class Fenetre extends javax.swing.JFrame {
         panelDessin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zone de Dessin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
         panelDessin.setPreferredSize(new java.awt.Dimension(700, 500));
 
+        grille.setBackground(new java.awt.Color(255, 255, 255));
+        grille.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout grilleLayout = new javax.swing.GroupLayout(grille);
+        grille.setLayout(grilleLayout);
+        grilleLayout.setHorizontalGroup(
+            grilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 664, Short.MAX_VALUE)
+        );
+        grilleLayout.setVerticalGroup(
+            grilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelDessinLayout = new javax.swing.GroupLayout(panelDessin);
         panelDessin.setLayout(panelDessinLayout);
         panelDessinLayout.setHorizontalGroup(
             panelDessinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDessinLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelDessinLayout.setVerticalGroup(
             panelDessinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelDessinLayout.createSequentialGroup()
+                .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelgauchePro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -492,6 +512,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton btnRectangle;
     private javax.swing.JButton btnSegment;
     private javax.swing.JButton btnTriangle;
+    private javax.swing.JPanel grille;
     private javax.swing.JMenuItem itemCarre;
     private javax.swing.JMenuItem itemCercle;
     private javax.swing.JMenuItem itemDoc;
