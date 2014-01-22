@@ -32,16 +32,15 @@ public class Main {
     	JPanel pan=new JPanel(new BorderLayout());
     	
     	JFrame frame = new JFrame("GeoAnalytique - version 0.01");
-    	Toolbar toolbar=new Toolbar();
-    	frame.add(toolbar, BorderLayout.EAST);
+
     	// example du prof
-    	frame.add(panel);
+    	//frame.add(panel);
     	frame.getContentPane().add(panel, java.awt.BorderLayout.CENTER);
     
     	frame.setSize(1024,778);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	Menu menu=new Menu();
-    	frame.setJMenuBar(menu.setMenu());
+    	
+    	frame.setJMenuBar(panel.menuBar);
     	frame.pack();
     	//frame.setVisible(true);
     	

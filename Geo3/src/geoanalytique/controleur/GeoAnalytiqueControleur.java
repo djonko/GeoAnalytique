@@ -51,7 +51,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public GeoAnalytiqueControleur(GeoAnalytiqueGUI view) {
 		objs = new ArrayList<GeoObject>();
 		this.view = view;
-		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getWidth());
+		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getHeight());
+		System.out.println("largeur "+view.getCanvas().getWidth()+" hauteur "+view.getCanvas().getHeight());
 		//viewport.resize(600,600);
 		
 		
