@@ -11,11 +11,13 @@ import geoanalytique.util.GeoObjectVisitor;
 public class Cercle extends Ellipse {
 	
 	public Cercle(Point c,Point p1,GeoAnalytiqueControleur controleur){
-		super(c,p1,new Point((p1.getY()-c.getY())+c.getX(),p1.getY(),null),controleur);
+		super(c,p1,new Point((p1.getY()-c.getY())+c.getX(),c.getY(),controleur),controleur);
+		
 		
 	}
 	public Cercle(String Name,Point c,Point p1,GeoAnalytiqueControleur controleur){
-		super(Name,c,p1,new Point(p1.getX(),(p1.getX()-c.getX())+c.getY(),null),controleur);	
+		super(Name,c,p1,new Point((p1.getY()-c.getY())+c.getX(),c.getY(),controleur),controleur);
+		//super(Name,c,p1,new Point(p1.getX(),(p1.getX()-c.getX())+c.getY(),controleur),controleur);	
 	}
 	
         @Override

@@ -64,7 +64,6 @@ public class GeoAnalytiqueGUI extends JPanel {
    // End of variables declaration//GEN-END:variables
 
    private void initialisation(){
-	   //this = new javax.swing.JPanel();
        toolbar = new javax.swing.JToolBar();
        btnCarre = new javax.swing.JButton();
        btnCercle = new javax.swing.JButton();
@@ -267,7 +266,7 @@ public class GeoAnalytiqueGUI extends JPanel {
        panelGrille.setBackground(Color.WHITE);
        panelGrille.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zone de Dessin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
        //panelGrille.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-       panelGrille.setPreferredSize(new java.awt.Dimension(800, 550));
+       panelGrille.setPreferredSize(new java.awt.Dimension(544,544));
 
        /*javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
        panelGrille.setLayout(panelGrilleLayout);
@@ -285,13 +284,13 @@ public class GeoAnalytiqueGUI extends JPanel {
            panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGrilleLayout.createSequentialGroup()
                .addContainerGap()
-               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                .addContainerGap())
        );
        panelGrilleLayout.setVerticalGroup(
            panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGroup(panelGrilleLayout.createSequentialGroup()
-               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                .addContainerGap())
        );
 
@@ -446,7 +445,7 @@ public class GeoAnalytiqueGUI extends JPanel {
        
    
      this.initialisation();
-      //grille.setSize(700,500);
+      //grille.setSize(600,600);
       
        // fin de moi
        
@@ -487,5 +486,229 @@ public class GeoAnalytiqueGUI extends JPanel {
 
     
     
-    
+    public GeoAnalytiqueView getGrille() {
+    	return grille;
+    }
+
+
+
+    public JPanel getPanelGrille() {
+    	return panelGrille;
+    }
+
+
+
+    public javax.swing.JButton getBtnCarre() {
+    	return btnCarre;
+    }
+
+
+
+    public javax.swing.JButton getBtnCercle() {
+    	return btnCercle;
+    }
+
+
+
+    public javax.swing.JButton getBtnDroite() {
+    	return btnDroite;
+    }
+
+
+
+    public javax.swing.JButton getBtnElipse() {
+    	return btnElipse;
+    }
+
+
+
+    public javax.swing.JButton getBtnRectangle() {
+    	return btnRectangle;
+    }
+
+
+
+    public javax.swing.JButton getBtnSegment() {
+    	return btnSegment;
+    }
+
+
+
+    public javax.swing.JButton getBtnTriangle() {
+    	return btnTriangle;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemCarre() {
+    	return itemCarre;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemCercle() {
+    	return itemCercle;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemDoc() {
+    	return itemDoc;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemDroite() {
+    	return itemDroite;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemInit() {
+    	return itemInit;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemLicence() {
+    	return itemLicence;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemNouveau() {
+    	return itemNouveau;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemRealiser() {
+    	return itemRealiser;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemSortir() {
+    	return itemSortir;
+    }
+
+
+
+    public javax.swing.JMenuItem getItemTheme() {
+    	return itemTheme;
+    }
+
+
+
+    public javax.swing.JScrollPane getjScrollPaneConsole() {
+    	return jScrollPaneConsole;
+    }
+
+
+
+    public javax.swing.JScrollPane getjScrollPaneLog() {
+    	return jScrollPaneLog;
+    }
+
+
+
+    public javax.swing.JPopupMenu.Separator getjSeparator1() {
+    	return jSeparator1;
+    }
+
+
+
+    public javax.swing.JTabbedPane getJtablePanel() {
+    	return jtablePanel;
+    }
+
+
+
+    public javax.swing.JMenu getMenuAide() {
+    	return menuAide;
+    }
+
+
+
+    public javax.swing.JMenu getMenuApropo() {
+    	return menuApropo;
+    }
+
+
+
+    public javax.swing.JMenuBar getMenuBar() {
+    	return menuBar;
+    }
+
+
+
+    public javax.swing.JMenu getMenuDessin() {
+    	return menuDessin;
+    }
+
+
+
+    public javax.swing.JMenu getMenuFichier() {
+    	return menuFichier;
+    }
+
+
+
+    public javax.swing.JMenu getMenuForme() {
+    	return menuForme;
+    }
+
+
+
+    public javax.swing.JMenu getMenuPreference() {
+    	return menuPreference;
+    }
+
+
+
+    public javax.swing.JPanel getPanelConsole() {
+    	return panelConsole;
+    }
+
+
+
+    public javax.swing.JPanel getPanelLog() {
+    	return panelLog;
+    }
+
+
+
+    public javax.swing.JPanel getPanelOutil() {
+    	return panelOutil;
+    }
+
+
+
+    public javax.swing.JPanel getPanelPropriete() {
+    	return panelPropriete;
+    }
+
+
+
+    public javax.swing.JPanel getPanelgauchePro() {
+    	return panelgauchePro;
+    }
+
+
+
+    public javax.swing.JTextArea getTextareLog() {
+    	return textareLog;
+    }
+
+
+
+    public javax.swing.JTextArea getTextareaConsole() {
+    	return textareaConsole;
+    }
+
+
+
+    public javax.swing.JToolBar getToolbar() {
+    	return toolbar;
+    }
 }

@@ -4,8 +4,7 @@ import geoanalytique.controleur.GeoAnalytiqueControleur;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Hashtable;
-import java.util.List;
+
 
 
 public class Carre extends Polygone{

@@ -3,7 +3,7 @@ package geoanalytique.model;
 import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
-import geoanalytique.graphique.GCoordonnee;
+
 
 /**
  * Modele mathematique pour les droites

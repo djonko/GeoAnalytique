@@ -71,4 +71,8 @@ public class GeoAnalytiqueView extends javax.swing.JPanel {
 	public void removeGraphique(Graphique c) {
 		graphiques.remove(c);		
 	}
+	
+	public ArrayList<Graphique> getGraphique(){
+		return this.graphiques;
+	}
 }

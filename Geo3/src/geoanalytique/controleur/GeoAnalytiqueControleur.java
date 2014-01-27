@@ -3,15 +3,10 @@ package geoanalytique.controleur;
 import geoanalytique.exception.ArgumentOperationException;
 import geoanalytique.exception.IncorrectTypeOperationException;
 import geoanalytique.exception.VisiteurException;
-import geoanalytique.graphique.Graphique;
-import geoanalytique.gui.GeoAnalytiqueGUI;
-import geoanalytique.model.Droite;
-import geoanalytique.model.GeoObject;
-import geoanalytique.model.Point;
-import geoanalytique.model.Segment;
-import geoanalytique.model.ViewPort;
-import geoanalytique.util.Dessinateur;
-import geoanalytique.util.Operation;
+import geoanalytique.graphique.*;
+import geoanalytique.gui.*;
+import geoanalytique.model.*;
+import geoanalytique.util.*;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -23,7 +18,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  * Cette classe est le controleur/presenteur principale. Tous les evenements importants
@@ -39,8 +36,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	private GeoAnalytiqueGUI view;
 	
 	private transient GeoObject select;
+	private containerPropriete panelPropriete;
 	
-        
+	private CreeGeoObject creeGeoObject;
+      
 		
 	/**
 	 * Constructeur de base afin de créer le lien entre la vue passee en
@@ -53,10 +52,21 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.view = view;
 		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getHeight());
 		System.out.println("largeur "+view.getCanvas().getWidth()+" hauteur "+view.getCanvas().getHeight());
-		//viewport.resize(600,600);
+		
 		
 		
 		// TODO: A completer avec vos modifications
+		panelPropriete=new containerPropriete();
+		this.creeGeoObject=new CreeGeoObject(this);
+		
+		this.view.getCanvas().addMouseListener(this);
+		this.view.getBtnCarre().addActionListener(this);
+		this.view.getBtnTriangle().addActionListener(this);
+		this.view.getBtnCercle().addActionListener(this);
+		this.view.getBtnElipse().addActionListener(this);
+		this.view.getBtnSegment().addActionListener(this);
+		this.view.getBtnRectangle().addActionListener(this);
+		this.panelPropriete.validerBtn.addActionListener(this);
 		
 		
 	}
@@ -90,13 +100,65 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		
 	}
 
+
 	public void actionPerformed(ActionEvent e) {
 		// TODO: a completer
-	}
+		
+		if (e.getSource()==this.view.getBtnCarre()){
+			this.cadresaisir("carre");
+		}else
+		if(e.getSource()==this.view.getBtnTriangle()){
+			this.cadresaisir("triangle");
+		}else
+		if(e.getSource()==this.view.getBtnCercle()){
+			this.cadresaisir("cercle");
+		}else if(e.getSource()==this.view.getBtnElipse()){
+			this.cadresaisir("elipse");
+		}else if(e.getSource()==this.view.getBtnSegment()){
+			this.cadresaisir("segment");
+		}else if(e.getSource()==this.view.getBtnRectangle()){
+			this.cadresaisir("rectangle");
+		}
+	    
+		if(e.getSource()==this.panelPropriete.validerBtn){
+			if(this.panelPropriete.jtableChamp.getModel().getRowCount()==5){
+				if(this.panelPropriete.jtableChamp.getModel().getValueAt(1,0)=="Centre x/y"){
+					
+				}
+				this.addObjet(new Carre("carre",this.creeGeoObject.creeFigure(panelPropriete),this));
+			}
+	    	//System.out.println(this.panelPropriete.jtableChamp.getModel().getValueAt(1,1));
+	    	System.out.println(this.panelPropriete.jtableChamp.getModel().getRowCount());
+	    	if(this.panelPropriete.jtableChamp.getModel().getRowCount()==4){
+	    		if(this.panelPropriete.jtableChamp.getModel().getValueAt(1,0)=="Centre x/y" ){
+		    		ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
+					this.addObjet(new Ellipse("ellipse",d.get(0),d.get(1),d.get(2),this));
+		    	}else
+				this.addObjet(new Triangle("triangle",this.creeGeoObject.creeFigure(panelPropriete),this));
+			}
+	    	
+	    	if(this.panelPropriete.jtableChamp.getModel().getRowCount()==3){
+	    		ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
+	    		if(this.panelPropriete.jtableChamp.getModel().getValueAt(1,0)=="extremite1 x/y" ){
+					this.addObjet(new Segment(d.get(0),d.get(1),this));
+		    	}else
+				this.addObjet(new Cercle("cercle",d.get(0),d.get(1),this));
+				System.out.println(""+d.get(0).getX());
+			}
+	    } 
+		this.view.getPanelPropriete().setVisible(true);
+		}
+	
 
 	public void mouseClicked(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
+		Point p=this.viewport.convert(e.getX(),e.getY());
+		//this.addObjet(p);
+		this.panelPropriete.data[1][1]=""+p.getX()+","+p.getY();
+		this.panelPropriete.jtableChamp.getModel().setValueAt(""+p.getX()+","+p.getY(),1,1);
+		p=null;
+		
 	}
 	
 
@@ -283,4 +345,36 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		}
 		throw new ArgumentOperationException("Nom de l'objet introuvable");
 	}
+	
+	private void placertablePropriete(JPanel panelPropriete){
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.view.getPanelgauchePro());
+		this.view.getPanelgauchePro().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPropriete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPropriete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(169, Short.MAX_VALUE))
+        );
+	}
+	
+	private void cadresaisir(String figure){
+		this.view.getPanelPropriete().setVisible(false);
+		JTable champ= new JTable();
+		panelPropriete.jtableChamp=champ;
+		creeGeoObject.donneeJtable(figure);
+		
+		panelPropriete.jtableChamp.setModel(new DefaultTableModel(this.creeGeoObject.data,this.creeGeoObject.tilte));
+		panelPropriete.jscrolChamp.setViewportView(panelPropriete.jtableChamp);
+		this.placertablePropriete(panelPropriete);
+	}
+	
+	
 }

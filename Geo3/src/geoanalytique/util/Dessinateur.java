@@ -64,6 +64,7 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 		int l=(int) Math.sqrt((c.getX()-p1.getX())*(c.getX()-p1.getX())+(c.getY()-p1.getY())*(c.getY()-p1.getY()));
 		int h=(int) Math.sqrt((c.getX()-p2.getX())*(c.getX()-p2.getX())+(c.getY()-p2.getY())*(c.getY()-p2.getY()));
 		GCoordonnee c2=viewport.convert(-(p2x-e.getCentre().getX())+e.getCentre().getX(),p1y);
+		System.out.println("hauteur "+h+" largeur"+l);
         return new GOvale(c2.getX(),c2.getY(),h*2,l*2);
 	}
 

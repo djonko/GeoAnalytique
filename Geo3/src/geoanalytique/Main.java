@@ -1,7 +1,7 @@
 package geoanalytique;
  
-import java.awt.BorderLayout;
-import java.awt.Color;
+
+
 import java.util.ArrayList;
 
 import geoanalytique.controleur.GeoAnalytiqueControleur;
@@ -10,11 +10,9 @@ import geoanalytique.model.*;
 import geoanalytique.model.geoobject.operation.MedianeOperation;
 import geoanalytique.model.geoobject.operation.MediatriceOperation;
 
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.LayoutStyle;
+
+
 
 /**lol de bobdi
  * Classe de lancement principale de l'application.
@@ -29,15 +27,13 @@ public class Main {
   
 	public static void main(String[] args) {
     	GeoAnalytiqueGUI panel = new GeoAnalytiqueGUI();
-    	JPanel pan=new JPanel(new BorderLayout());
-    	
     	JFrame frame = new JFrame("GeoAnalytique - version 0.01");
 
     	// example du prof
     	//frame.add(panel);
     	frame.getContentPane().add(panel, java.awt.BorderLayout.CENTER);
     
-    	frame.setSize(900,778);
+    	frame.setSize(800,778);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
     	frame.setJMenuBar(panel.menuBar);
@@ -49,16 +45,16 @@ public class Main {
     	
     	GeoAnalytiqueControleur controleur = new GeoAnalytiqueControleur(panel);
     	controleur.prepareTout();
-    	//frame.PanelGraphiq.add(panel);
-        // Petit exemple
-        //controleur.addObjet(new Point("Ori",0,0, controleur));
-        Point c=new Point("Ori", 6,6, controleur);
-        Point p=new Point("Ori",0,-1, controleur);
-        Point p2=new Point("Ori",-1,1, controleur);
-        Cercle e=new Cercle(c,p,controleur);
-        Segment s=new Segment(p,p2,controleur);
-        Droite mil=(Droite) (new MediatriceOperation(1,s)).calculer();
+    	Point p=new Point("Ori",4,4, controleur);
+        Point p2=new Point("Ori",4,7, controleur);
         
+        Point p22=new Point((p2.getY()-p.getY())+p.getX(),p.getY(),controleur);
+        System.out.println(p22.getY()+"voila");
+        controleur.addObjet(p22);
+        Segment s=new Segment(p,p2,controleur);
+        Cercle cl=new Cercle(p,p2,controleur);
+        Droite mil=(Droite) (new MediatriceOperation(1,s)).calculer();
+        controleur.addObjet(cl);
         ArrayList<Point> ct=new ArrayList<Point>();
         ct.add(new Point(2,6,controleur));
         ct.add(new Point(4,6,controleur));
