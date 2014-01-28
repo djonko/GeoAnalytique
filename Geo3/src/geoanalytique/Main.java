@@ -45,6 +45,8 @@ public class Main {
     	
     	GeoAnalytiqueControleur controleur = new GeoAnalytiqueControleur(panel);
     	controleur.prepareTout();
+    	
+    	/*
     	Point p=new Point("Ori",4,4, controleur);
         Point p2=new Point("Ori",4,7, controleur);
         
@@ -63,11 +65,11 @@ public class Main {
         
         controleur.addObjet(new Point(4,4,controleur));
         controleur.addObjet(new Point(4,6,controleur));
-        /*
+      
         ct.add(new Point(2,2,controleur));
         ct.add(new Point(5,5,controleur));
         ct.add(new Point(2,3,controleur));
-       */
+      
         //Polygone PP=new Carre(ct,controleur);
         //Polygone PP=new Rectangle(ct,controleur);
         Polygone PP=new Triangle(ct,controleur);
@@ -82,10 +84,10 @@ public class Main {
         System.out.println(" la pente"+mil.pente);
         controleur.addObjet(p);
         controleur.addObjet(p2);
-        
+        */
     	
     	frame.setVisible(true);
-    	
+
     }
 
 }

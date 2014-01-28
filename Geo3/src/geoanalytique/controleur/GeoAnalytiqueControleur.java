@@ -67,6 +67,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.view.getBtnSegment().addActionListener(this);
 		this.view.getBtnRectangle().addActionListener(this);
 		this.panelPropriete.validerBtn.addActionListener(this);
+		this.view.getBtnZomPlus().addActionListener(this);
+		this.view.getBtnZomMoin().addActionListener(this);
 		
 		
 	}
@@ -84,7 +86,13 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             // TODO: a completer
 	}
 	
-	
+	public  void zoom(int x){
+		this.view.getCanvas().clear();
+		this.view.repaint();
+		this.viewport.resize(viewport.getLargeur()+x,viewport.getHauteur()+x);
+		
+		recalculPoints();
+	}
 	/**
          * Cette fonction est appele par le modele pour prevenir le controleur
          * d'une mise a jour de l'objet geometrique passe en argument. Le 
@@ -103,7 +111,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO: a completer
-		
+		if (e.getSource()==this.view.getBtnZomPlus()){
+			this.zoom(+30);
+		}else
+		if (e.getSource()==this.view.getBtnZomMoin()){
+			this.zoom(-30);
+		}else
 		if (e.getSource()==this.view.getBtnCarre()){
 			this.cadresaisir("carre");
 		}else

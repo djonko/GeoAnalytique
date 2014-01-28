@@ -24,6 +24,12 @@ public class GeoAnalytiqueGUI extends JPanel {
 
 // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnCarre;
+   private javax.swing.JButton btnZomPlus;
+
+
+
+
+private javax.swing.JButton btnZomMoin;
    private javax.swing.JButton btnCercle;
    private javax.swing.JButton btnDroite;
    private javax.swing.JButton btnElipse;
@@ -66,6 +72,8 @@ public class GeoAnalytiqueGUI extends JPanel {
    private void initialisation(){
        toolbar = new javax.swing.JToolBar();
        btnCarre = new javax.swing.JButton();
+       btnZomPlus=new JButton();
+       btnZomMoin=new JButton();
        btnCercle = new javax.swing.JButton();
        btnDroite = new javax.swing.JButton();
        btnElipse = new javax.swing.JButton();
@@ -112,6 +120,8 @@ public class GeoAnalytiqueGUI extends JPanel {
        toolbar.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBox.highlight"));
        toolbar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1)));
        toolbar.setFloatable(false);
+       
+       
        
        btnCarre.setText("Carre");
        btnCarre.setFocusable(false);
@@ -184,6 +194,28 @@ public class GeoAnalytiqueGUI extends JPanel {
            }
        });
        toolbar.add(btnRectangle);
+       
+       btnZomPlus.setText("Zoom +");
+       btnZomPlus.setFocusable(false);
+       btnZomPlus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+       btnZomPlus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+       btnZomPlus.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               //btnCarreActionPerformed(evt);
+           }
+       });
+       toolbar.add(btnZomPlus);
+       
+       btnZomMoin.setText("Zoom -");
+       btnZomMoin.setFocusable(false);
+       btnZomMoin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+       btnZomMoin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+       btnZomMoin.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               //btnCarreActionPerformed(evt);
+           }
+       });
+       toolbar.add(btnZomMoin);
        
        panelOutil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
        
@@ -710,5 +742,12 @@ public class GeoAnalytiqueGUI extends JPanel {
 
     public javax.swing.JToolBar getToolbar() {
     	return toolbar;
+    }
+    public javax.swing.JButton getBtnZomPlus() {
+    	return btnZomPlus;
+    }
+
+    public javax.swing.JButton getBtnZomMoin() {
+    	return btnZomMoin;
     }
 }
