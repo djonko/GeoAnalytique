@@ -13,14 +13,14 @@ public class GPolygone extends Graphique{
 		super.color=Color.green;
 		tabX=x;
 		tabY=y;
-		this.nb=nb;
+		this.setNb(nb);
 	}
 	
 	public GPolygone(int x[],int y[],int nb,Color c){
 		super.color=c;
 		tabX=x;
 		tabY=y;
-		this.nb=nb;
+		this.setNb(nb);
 	}
 	
 	@Override
@@ -51,6 +51,14 @@ public class GPolygone extends Graphique{
 
 	public void setTabY(int tabY[]) {
 		this.tabY = tabY;
+	}
+
+	public int getNb() {
+		return nb;
+	}
+
+	public void setNb(int nb) {
+		this.nb = nb;
 	}
 
 }

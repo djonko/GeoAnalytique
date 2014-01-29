@@ -85,7 +85,7 @@ public class CreeGeoObject {
 	                {"nom","elipse1"},
 	                {"Centre x/y","1/1"},
 	                {"AP x/y","1/6"},
-	                {"PR x/y","1/3"}
+	                {"PR x/y","3/1"}
 	            };
 	        tilte=new String [] {
 	                "champs", "Valeurs"

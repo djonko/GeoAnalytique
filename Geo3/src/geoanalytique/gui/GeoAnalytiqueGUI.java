@@ -51,6 +51,7 @@ private javax.swing.JButton btnZomMoin;
    private javax.swing.JPopupMenu.Separator jSeparator1;
    //private javax.swing.JPanel jpanelContainer;
    private javax.swing.JTabbedPane jtablePanel;
+   private JPopupMenu popupMenu;
    private javax.swing.JMenu menuAide;
    private javax.swing.JMenu menuApropo;
    public javax.swing.JMenuBar menuBar;
@@ -97,6 +98,7 @@ private javax.swing.JButton btnZomMoin;
        
        tablepanelGauche = new javax.swing.JTabbedPane();
        panelgauchePro = new javax.swing.JPanel();
+       popupMenu= new JPopupMenu();
        menuBar = new javax.swing.JMenuBar();
        menuFichier = new javax.swing.JMenu();
        itemNouveau = new javax.swing.JMenuItem();
@@ -236,6 +238,7 @@ private javax.swing.JButton btnZomMoin;
 
        textareaConsole.setColumns(20);
        textareaConsole.setRows(5);
+       textareaConsole.setText("Console GeoAnalytique v1.0 !!! \n");
        jScrollPaneConsole.setViewportView(textareaConsole);
 
        javax.swing.GroupLayout panelConsoleLayout = new javax.swing.GroupLayout(panelConsole);
@@ -402,7 +405,9 @@ private javax.swing.JButton btnZomMoin;
            }
        });
        menuFichier.add(itemSortir);
-
+       ///////////////////////////////////////////////////////////////////////////////////////////////////
+       popupMenu.setBackground(new java.awt.Color(255, 255, 255));
+      
        menuBar.add(menuFichier);
 
        menuForme.setText("Formes");
@@ -750,4 +755,16 @@ private javax.swing.JButton btnZomMoin;
     public javax.swing.JButton getBtnZomMoin() {
     	return btnZomMoin;
     }
+
+
+
+	public JPopupMenu getPopupMenu() {
+		return popupMenu;
+	}
+
+
+
+	public void setPopupMenu(JPopupMenu popupMenu) {
+		this.popupMenu = popupMenu;
+	}
 }

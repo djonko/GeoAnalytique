@@ -32,10 +32,10 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 		//double yma=d.p.getY()+ (d.pente *(viewport.getXMax()-d.p.getX()));
 		//double ymi=d.p.getY()- (d.pente *(viewport.getXMin()-d.p.getX()));
 
-		GCoordonnee c=(GCoordonnee) this.visitPoint(d.p);
-		int ymax=c.getY()+((int)d.pente*(viewport.getLargeur()- c.getX()));
-		int ymin=c.getY()-((int)d.pente* c.getX());
-		System.out.println(""+ymax+" le min "+ymin+" largeur "+viewport.getLargeur());
+		GCoordonnee c=viewport.convert(d.p.getX(),d.p.getY());
+		int ymax=(int)(c.getY()+(d.pente*(viewport.getLargeur()- c.getX())));
+		int ymin=(int)(c.getY()-(d.pente* c.getX()));
+		System.out.println("p1:"+0+"/"+ymin+" p2:"+viewport.getLargeur()+"/"+ymax);
 		return new GLigne(0,ymin,viewport.getLargeur(),ymax);
 		
             //return null;
@@ -120,4 +120,6 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 		return new GLigne(c1.getX(),c1.getY(),c2.getX(),c2.getY());
 		
 	}
+	
+	
 }

@@ -7,6 +7,7 @@ import geoanalytique.graphique.*;
 import geoanalytique.gui.*;
 import geoanalytique.model.*;
 import geoanalytique.util.*;
+import geoanalytique.view.GeoAnalytiqueView;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -102,9 +103,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          */
 	public void update(GeoObject object) {
 		// TODO: a completer
-		/*objs.remove(object);
-		objs.add();
-		recalculPoints();*/
+		
+		if(this.objs.contains(object)==true){
+			this.view.getCanvas().clear();
+			this.view.repaint();
+			recalculPoints();
+		}
 		
 	}
 
@@ -166,11 +170,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void mouseClicked(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
-		Point p=this.viewport.convert(e.getX(),e.getY());
-		//this.addObjet(p);
-		this.panelPropriete.data[1][1]=""+p.getX()+","+p.getY();
-		this.panelPropriete.jtableChamp.getModel().setValueAt(""+p.getX()+","+p.getY(),1,1);
-		p=null;
+			
 		
 	}
 	
@@ -178,6 +178,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void mouseReleased(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
+		this.view.getCanvas().clear();
+		this.view.repaint();
+		this.recalculPoints();
+		
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -188,9 +192,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void mouseExited(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
+		
 	}
 
 	public void mousePressed(MouseEvent e) {
+		this.selectOb(e);
+		
             // TODO: a completer pour un clique souris dans le canevas
 	}
 
@@ -203,8 +210,34 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          */
 	private void selectionner(GeoObject o) {
 		// TODO: a completer
+		
 	}
 	
+	private void maybeShowPopup(MouseEvent e) {
+		if (e.isPopupTrigger()) {
+		this.view.getPopupMenu().show(e.getComponent(),e.getX(), e.getY());
+		}
+	} 
+	private GeoObject selectOb(MouseEvent e){
+		
+		Point p=this.viewport.convert(e.getX(),e.getY());
+		this.ecrireConsole("la souris pointe sur P:"+p.getX()+"/"+p.getY());
+		for(GeoObject ob: this.objs){
+			if(ob instanceof Segment){
+				Segment s=(Segment)(ob);
+				p.setX( (Math.round(p.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+				p.setY( (Math.round(p.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+				this.ecrireConsole(" arrondi"+p.getX());
+				if(s.contient(p)){
+					JMenuItem itemMediatrice=new JMenuItem("tracer mediatrice");
+					this.view.getPopupMenu().add(itemMediatrice);
+					this.maybeShowPopup(e);
+					this.ecrireConsole("oui deugeu");
+				}
+			}
+		}
+		return null;
+	}
 	/**
          * Operation permettant de deselectionner le dernier objet selectionne
          * (si il existe). On pourra enlever tous marqueurs present sur l'interface
@@ -264,7 +297,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 			
 			view.getCanvas().addGraphique(d.visitDroite(droite));
 			view.getCanvas().addGraphique(d.visitDroite(droite2));
-			
+			this.repere(view.getCanvas(), d);
                     c = o.visitor(d);
                     view.getCanvas().addGraphique(c);
                 } catch (VisiteurException e) {
@@ -387,6 +420,28 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		panelPropriete.jtableChamp.setModel(new DefaultTableModel(this.creeGeoObject.data,this.creeGeoObject.tilte));
 		panelPropriete.jscrolChamp.setViewportView(panelPropriete.jtableChamp);
 		this.placertablePropriete(panelPropriete);
+	}
+	
+	private void repere(GeoAnalytiqueView view,Dessinateur d){
+		for(int i=-10;i<=9;i++){
+			Point p1=new Point(-0.2,i,this);
+			Point p2=new Point(0.2,i,this);
+			
+			Point p11=new Point(i,-0.2,this);
+			Point p22=new Point(i,0.2,this);
+			try {
+			view.addGraphique(d.visitSegment(new Segment(p1,p2,this)));		
+			view.addGraphique(d.visitSegment(new Segment(p11,p22,this)));	
+			} catch (VisiteurException e1) {
+					// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+		}
+	}
+	
+	//ecrire dans la console
+	public void ecrireConsole(String s){
+		this.view.getTextareaConsole().setText(this.view.getTextareaConsole().getText()+"\n"+s);
 	}
 	
 	
