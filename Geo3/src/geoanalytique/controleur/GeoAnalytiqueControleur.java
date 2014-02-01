@@ -130,7 +130,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		if(e.getSource()==this.view.getBtnCercle()){
 			this.cadresaisir("cercle");
 		}else if(e.getSource()==this.view.getBtnElipse()){
-			this.cadresaisir("elipse");
+			this.cadresaisir("ellipse");
 		}else if(e.getSource()==this.view.getBtnSegment()){
 			this.cadresaisir("segment");
 		}else if(e.getSource()==this.view.getBtnRectangle()){
@@ -138,30 +138,33 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		}
 	    
 		if(e.getSource()==this.panelPropriete.validerBtn){
-			if(this.panelPropriete.jtableChamp.getModel().getRowCount()==5){
-				if(this.panelPropriete.jtableChamp.getModel().getValueAt(1,0)=="Centre x/y"){
-					
-				}
-				this.addObjet(new Carre("carre",this.creeGeoObject.creeFigure(panelPropriete),this));
-			}
-	    	//System.out.println(this.panelPropriete.jtableChamp.getModel().getValueAt(1,1));
-	    	System.out.println(this.panelPropriete.jtableChamp.getModel().getRowCount());
-	    	if(this.panelPropriete.jtableChamp.getModel().getRowCount()==4){
-	    		if(this.panelPropriete.jtableChamp.getModel().getValueAt(1,0)=="Centre x/y" ){
-		    		ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
-					this.addObjet(new Ellipse("ellipse",d.get(0),d.get(1),d.get(2),this));
-		    	}else
-				this.addObjet(new Triangle("triangle",this.creeGeoObject.creeFigure(panelPropriete),this));
+			String name=(String) this.panelPropriete.jtableChamp.getModel().getValueAt(0,1);
+			if(this.panelPropriete.jtableChamp.getColumnName(0)=="carre"){
+				this.addObjet(new Carre(name,this.creeGeoObject.creeFigure(panelPropriete),this));
+			}else 
+				if(this.panelPropriete.jtableChamp.getColumnName(0)=="rectangle"){
+				this.addObjet(new Rectangle(name,this.creeGeoObject.creeFigure(panelPropriete),this));
+			}else 
+				if(this.panelPropriete.jtableChamp.getColumnName(0)=="cercle"){
+				ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
+				this.addObjet(new Cercle(name,d.get(0),d.get(1),this));
+			}else 
+				if(this.panelPropriete.jtableChamp.getColumnName(0)=="ellipse"){
+				ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
+				this.addObjet(new Ellipse(name,d.get(0),d.get(1),d.get(2),this));
+			}else 
+				if(this.panelPropriete.jtableChamp.getColumnName(0)=="triangle"){
+				this.addObjet(new Triangle(name,this.creeGeoObject.creeFigure(panelPropriete),this));
+			}else 
+				if(this.panelPropriete.jtableChamp.getColumnName(0)=="segment"){
+					ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
+					this.addObjet(new Segment(d.get(0),d.get(1),this));
+			}else 
+				if(this.panelPropriete.jtableChamp.getColumnName(0)=="point"){
+					ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
+					this.addObjet(new Point(name,d.get(0).getX(),d.get(0).getY(),this));
 			}
 	    	
-	    	if(this.panelPropriete.jtableChamp.getModel().getRowCount()==3){
-	    		ArrayList<Point> d=this.creeGeoObject.creeFigure(panelPropriete);
-	    		if(this.panelPropriete.jtableChamp.getModel().getValueAt(1,0)=="extremite1 x/y" ){
-					this.addObjet(new Segment(d.get(0),d.get(1),this));
-		    	}else
-				this.addObjet(new Cercle("cercle",d.get(0),d.get(1),this));
-				System.out.println(""+d.get(0).getX());
-			}
 	    } 
 		this.view.getPanelPropriete().setVisible(true);
 		}
@@ -219,20 +222,41 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		}
 	} 
 	private GeoObject selectOb(MouseEvent e){
-		
 		Point p=this.viewport.convert(e.getX(),e.getY());
+		p.setX( (Math.round(p.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+		p.setY( (Math.round(p.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
 		this.ecrireConsole("la souris pointe sur P:"+p.getX()+"/"+p.getY());
 		for(GeoObject ob: this.objs){
 			if(ob instanceof Segment){
 				Segment s=(Segment)(ob);
-				p.setX( (Math.round(p.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
-				p.setY( (Math.round(p.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
 				this.ecrireConsole(" arrondi"+p.getX());
 				if(s.contient(p)){
-					JMenuItem itemMediatrice=new JMenuItem("tracer mediatrice");
-					this.view.getPopupMenu().add(itemMediatrice);
-					this.maybeShowPopup(e);
 					this.ecrireConsole("oui deugeu");
+					return s;
+				}
+			}else if(ob instanceof Carre){
+				Carre c=(Carre)(ob);
+				if(c.contient(p)){
+					this.ecrireConsole("oui deugeu carre");
+					return c;
+				}
+			}else if(ob instanceof Rectangle){
+				Rectangle c=(Rectangle)(ob);
+				if(c.contient(p)){
+					this.ecrireConsole("oui deugeu Rectangle");
+					return c;
+				}
+			}else if(ob instanceof Cercle){
+				Cercle c=(Cercle)(ob);
+				if(c.contient(p)){
+					this.ecrireConsole("oui deugeu Cercle");
+					return c;
+				}
+			}else if(ob instanceof Ellipse){
+				Ellipse c=(Ellipse)(ob);
+				if(c.contient(p)){
+					this.ecrireConsole("oui deugeu Ellipse");
+					return c;
 				}
 			}
 		}

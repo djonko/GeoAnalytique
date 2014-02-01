@@ -158,7 +158,7 @@ private javax.swing.JButton btnZomMoin;
        });
        toolbar.add(btnDroite);
 
-       btnElipse.setText("Elipse");
+       btnElipse.setText("Ellipse");
        btnElipse.setFocusable(false);
        btnElipse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
        btnElipse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

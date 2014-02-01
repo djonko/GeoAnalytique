@@ -28,7 +28,6 @@ public class CreeGeoObject {
 		if(taille > 1){
 			for(int i=0;i<taille;i++){
 				valeur=(String) panelPropriete.jtableChamp.getModel().getValueAt(i,1);
-				System.out.println("val= "+valeur);
 				if(i==0)
 					name=valeur;
 				else{
@@ -69,7 +68,7 @@ public class CreeGeoObject {
 	                {"point3 x/y","6/6"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "triangle", "Valeurs"
 	            };
 		}else if(figure=="cercle"){
 			data =new Object [][] {
@@ -78,9 +77,9 @@ public class CreeGeoObject {
 	                {"rayon x/y","2/4"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "cercle", "Valeurs"
 	            };
-		}else if(figure=="elipse"){
+		}else if(figure=="ellipse"){
 			data =new Object [][] {
 	                {"nom","elipse1"},
 	                {"Centre x/y","1/1"},
@@ -88,7 +87,7 @@ public class CreeGeoObject {
 	                {"PR x/y","3/1"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "ellipse", "Valeurs"
 	            };
 		}else if(figure=="point"){
 			data =new Object [][] {
@@ -96,7 +95,7 @@ public class CreeGeoObject {
 	                {"coord x/y","0/0"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "point", "Valeurs"
 	            };
 			
 		}else if(figure=="segment"){
@@ -106,7 +105,7 @@ public class CreeGeoObject {
 	                {"extremite2 x/y","1/8"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "segment", "Valeurs"
 	            };
 		}else if(figure=="carre"){
 			data =new Object [][] {
@@ -117,7 +116,7 @@ public class CreeGeoObject {
 	                {"point4 x/y","6/2"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "carre", "Valeurs"
 	            };
 		}else if(figure=="rectangle"){
 			data =new Object [][] {
@@ -128,7 +127,7 @@ public class CreeGeoObject {
 	                {"point4 x/y","6/2"}
 	            };
 	        tilte=new String [] {
-	                "champs", "Valeurs"
+	                "rectangle", "Valeurs"
 	            };
 		}
 		else{

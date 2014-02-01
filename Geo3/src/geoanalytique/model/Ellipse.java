@@ -56,6 +56,9 @@ public class Ellipse extends Surface {
 	@Override
 	public boolean contient(Point p) {
                // TODO: a completer
+		//if (this.getCentre().calculerDistance(this.getP2())>=Math.sqrt(Math.pow(p.getX()-this.getCentre().getX(),2)+Math.pow(p.getY()-this.getCentre().getY(),2)))
+			if (this.getCentre().calculerDistance(this.getP1())>=Math.sqrt(Math.pow(p.getX()-this.getCentre().getX(),2)+Math.pow(p.getY()-this.getCentre().getY(),2)))
+				return true;
             return false;
 	}
     

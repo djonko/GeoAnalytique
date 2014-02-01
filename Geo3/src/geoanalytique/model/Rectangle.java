@@ -44,5 +44,37 @@ public class Rectangle extends Polygone{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public boolean contient(Point p) {
+        // TODO: a completer
+		if((this.plusPetit().getX()<=p.getX() && this.plusGrand().getX()>=p.getX()) && (this.plusPetit().getY()<=p.getY() && this.plusGrand().getY()>=p.getY())){
+			return true;
+		}else{
+			for(int i=1;i<=4;i++){
+				if(this.getSegment(i).contient(p))
+					return true;
+			}
+		}
+        return false;
+	}
+	
+	private Point plusGrand(){
+		Point max=((ArrayList<Point>) this.controles).get(0);
+		for(Point p: this.controles){
+			if(p.getX()>max.getX() &&p.getY()>max.getY()){
+				max=p;
+			}
+		}
+		return max;
+	}
+	private Point plusPetit(){
+		Point min=((ArrayList<Point>) this.controles).get(0);
+		for(Point p: this.controles){
+			if(p.getX()<min.getX() && p.getY()<min.getY()){
+				min=p;
+			}
+		}
+		return min;
+	}
 
 }
