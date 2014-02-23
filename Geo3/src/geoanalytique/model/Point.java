@@ -73,12 +73,6 @@ public class Point extends GeoObject {
        // return 0.0;
     }
     
-    public void deplacer(double dx, double dy) {
-        // TODO: a completer
-    	this.setX(this.getX()+dx);
-    	this.setY(this.getY()+dy);
-    	
-    }
     
     public Point milieuDeuxPoint(Point p){
     	return new Point( (this.x+p.getX())/2,(this.y+p.getY())/2,super.getControleur());
@@ -92,6 +86,13 @@ public class Point extends GeoObject {
 	@Override
 	public boolean contient(Point p) {
 		return equals(p);
+	}
+
+	@Override
+	public void deplacer(double dx, double dy) {
+		// TODO Auto-generated method stub
+		this.setX((dx-this.getX())+this.x);
+    	this.setY((dy-this.getY())+this.y);
 	}
 	
 

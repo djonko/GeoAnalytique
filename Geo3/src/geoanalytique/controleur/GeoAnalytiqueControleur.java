@@ -6,6 +6,8 @@ import geoanalytique.exception.VisiteurException;
 import geoanalytique.graphique.*;
 import geoanalytique.gui.*;
 import geoanalytique.model.*;
+import geoanalytique.model.geoobject.operation.MedianeOperation;
+import geoanalytique.model.geoobject.operation.MediatriceOperation;
 import geoanalytique.util.*;
 import geoanalytique.view.GeoAnalytiqueView;
 
@@ -17,6 +19,7 @@ import java.awt.event.HierarchyBoundsListener;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -30,16 +33,20 @@ import javax.swing.table.DefaultTableModel;
  * 
  *
  */
-public class GeoAnalytiqueControleur implements ActionListener, MouseListener, HierarchyBoundsListener {
+public class GeoAnalytiqueControleur implements ActionListener, MouseListener, HierarchyBoundsListener ,MouseMotionListener {
 
 	private ArrayList<GeoObject> objs;
+	private ArrayList<OperationControleur> opControleur;
 	private ViewPort viewport;
 	private GeoAnalytiqueGUI view;
 	
-	private transient GeoObject select;
+	public transient GeoObject select;
 	private containerPropriete panelPropriete;
 	
 	private CreeGeoObject creeGeoObject;
+	private GeoObject save;
+	private Point mouseCl;
+
       
 		
 	/**
@@ -51,6 +58,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public GeoAnalytiqueControleur(GeoAnalytiqueGUI view) {
 		objs = new ArrayList<GeoObject>();
 		this.view = view;
+		opControleur=new ArrayList<OperationControleur>();
 		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getHeight());
 		System.out.println("largeur "+view.getCanvas().getWidth()+" hauteur "+view.getCanvas().getHeight());
 		
@@ -70,6 +78,9 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.panelPropriete.validerBtn.addActionListener(this);
 		this.view.getBtnZomPlus().addActionListener(this);
 		this.view.getBtnZomMoin().addActionListener(this);
+		this.view.getOperationJMenuItem().getItemRemove().addActionListener(this);
+		this.view.getCanvas().addMouseMotionListener(this);
+		this.view.getItemInit().addActionListener(this);
 		
 		
 	}
@@ -83,6 +94,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          */
 	public void addObjet(GeoObject obj) {
             objs.add(obj);
+            this.view.getCanvas().clear();
+    		this.view.repaint();
             recalculPoints();	
             // TODO: a completer
 	}
@@ -91,9 +104,9 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.view.getCanvas().clear();
 		this.view.repaint();
 		this.viewport.resize(viewport.getLargeur()+x,viewport.getHauteur()+x);
-		
 		recalculPoints();
 	}
+
 	/**
          * Cette fonction est appele par le modele pour prevenir le controleur
          * d'une mise a jour de l'objet geometrique passe en argument. Le 
@@ -124,6 +137,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		if (e.getSource()==this.view.getBtnCarre()){
 			this.cadresaisir("carre");
 		}else
+			if(e.getSource()==this.view.getItemInit()){
+					this.objs=new ArrayList<GeoObject>();
+					this.recalculPoints();
+			}else
 		if(e.getSource()==this.view.getBtnTriangle()){
 			this.cadresaisir("triangle");
 		}else
@@ -135,11 +152,15 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 			this.cadresaisir("segment");
 		}else if(e.getSource()==this.view.getBtnRectangle()){
 			this.cadresaisir("rectangle");
+			//action sur le btn remove
+		}else if(e.getSource()==this.view.getOperationJMenuItem().getItemRemove()){
+			this.ecrireConsole(" remove "+e.getSource()+"\n"+this.save);
+			this.deselectionner();
 		}
 	    
 		if(e.getSource()==this.panelPropriete.validerBtn){
 			String name=(String) this.panelPropriete.jtableChamp.getModel().getValueAt(0,1);
-			if(this.panelPropriete.jtableChamp.getColumnName(0)=="carre"){
+			if(this.panelPropriete.jtableChamp.getColumnName(0)=="carre"){				
 				this.addObjet(new Carre(name,this.creeGeoObject.creeFigure(panelPropriete),this));
 			}else 
 				if(this.panelPropriete.jtableChamp.getColumnName(0)=="rectangle"){
@@ -165,7 +186,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 					this.addObjet(new Point(name,d.get(0).getX(),d.get(0).getY(),this));
 			}
 	    	
-	    } 
+	    }
+		this.view.getCanvas().clear();
+		this.view.repaint();
+		recalculPoints();
 		this.view.getPanelPropriete().setVisible(true);
 		}
 	
@@ -173,7 +197,11 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void mouseClicked(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
-			
+		this.select=this.selectOb(e);
+		/*this.mouseCl=this.viewport.convert(e.getX(),e.getY());
+		this.mouseCl.setX( (Math.round(this.mouseCl.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+		this.mouseCl.setY( (Math.round(this.mouseCl.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+		*/
 		
 	}
 	
@@ -181,15 +209,13 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void mouseReleased(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
-		this.view.getCanvas().clear();
-		this.view.repaint();
-		this.recalculPoints();
 		
 	}
 
 	public void mouseEntered(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
+		
 	}
 
 	public void mouseExited(MouseEvent e) {
@@ -197,10 +223,35 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             // mais customisable si necessaire
 		
 	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		Point p=this.viewport.convert(e.getX(),e.getY());
+		p.setX( (Math.round(p.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+		p.setY( (Math.round(p.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
+		this.ecrireConsole("vale "+p.getX());
+		if(this.select instanceof Point ){
+			for(GeoObject o:this.objs ){
+				if(o==this.select){
+					o.deplacer(p.getX(),p.getY());
+					this.update(select);
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public void mousePressed(MouseEvent e) {
-		this.selectOb(e);
-		
+		this.select=this.selectOb(e);
+		this.selectionner(this.select);
+		maybeShowPopup(e);
             // TODO: a completer pour un clique souris dans le canevas
 	}
 
@@ -209,15 +260,48 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          * selection d'un objet geometrique dans la vue. Cette fonction est tres
          * utile pour marquer l'objet selectionne de maniere plus significative.
          * 
-         * @param o objet a selectionne
+         * @param obj objet a selectionne
          */
-	private void selectionner(GeoObject o) {
+	private void selectionner(GeoObject obj) {
 		// TODO: a completer
+		//this.ecrireConsole(""+obj.getOperations());
 		
+		if(obj!=null){
+			for(Operation op: obj.getOperations()){
+				if(op instanceof MediatriceOperation && obj instanceof Segment){
+					OperationControleur p=new OperationControleur(obj,op,this);
+					this.view.getOperationJMenuItem().getItemMediatrice().addActionListener(p);
+					if(this.opControleur.contains(p)==false || this.opControleur==null)
+						this.opControleur.add(p);
+				}	
+			}
+		}
 	}
 	
 	private void maybeShowPopup(MouseEvent e) {
+		this.view.setPopupMenu(new JPopupMenu());
 		if (e.isPopupTrigger()) {
+			if(this.select instanceof Segment){
+				//this.view.getOperationJMenuItem().getItemMediatrice().addActionListener(this.);
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemMediatrice());
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemDeplacer());
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			}else if(this.select instanceof Cercle){
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			}else if(this.select instanceof Ellipse){
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			}else if(this.select instanceof Triangle){
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			
+			}else if(this.select instanceof Carre){
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			}else if(this.select instanceof Rectangle){
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			
+			}else if(this.select instanceof Droite){
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
+			}
+			
 		this.view.getPopupMenu().show(e.getComponent(),e.getX(), e.getY());
 		}
 	} 
@@ -227,12 +311,28 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		p.setY( (Math.round(p.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
 		this.ecrireConsole("la souris pointe sur P:"+p.getX()+"/"+p.getY());
 		for(GeoObject ob: this.objs){
-			if(ob instanceof Segment){
-				Segment s=(Segment)(ob);
+				if(ob instanceof Segment){
+					Segment s=(Segment)(ob);
+					this.ecrireConsole(" arrondi"+p.getX());
+					if(s.contient(p)){
+						this.ecrireConsole("oui deugeu segment");
+						return s;
+					}
+				}else
+			if(ob instanceof Point){
+				Point pnt=(Point)(ob);
 				this.ecrireConsole(" arrondi"+p.getX());
-				if(s.contient(p)){
-					this.ecrireConsole("oui deugeu");
-					return s;
+				if(pnt.contient(p)){
+					this.ecrireConsole("oui deugeu Point");
+					return pnt;
+				}
+			}
+			if(ob instanceof Droite){
+				Droite d=(Droite)(ob);
+				this.ecrireConsole(" arrondi"+p.getX());
+				if(d.contient(p)){
+					this.ecrireConsole("oui deugeu droite");
+					return d;
 				}
 			}else if(ob instanceof Carre){
 				Carre c=(Carre)(ob);
@@ -269,6 +369,52 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
          */	
 	private void deselectionner() {
 		// TODO: a completer
+		GeoObject save=null;
+
+		this.ecrireConsole(" object selectionne :"+this.select+"\n");
+		if(this.select !=null){
+					save=this.select;
+					if(save instanceof Segment){
+						save=(Segment)save;
+						this.objs.remove(((Segment) save).getP1());
+						this.objs.remove(((Segment) save).getP2());
+					}
+					else if(save instanceof Carre){
+						save=(Carre)save;
+						for(Point p:((Carre) save).getControles()){
+							this.objs.remove(p);
+						}
+					}else if(save instanceof Rectangle){
+						save=(Rectangle)save;
+						for(Point p: (((Polygone) save).getControles())){
+							this.objs.remove(p);
+						}
+					}else if(save instanceof Cercle){
+						save=(Cercle)save;
+						this.objs.remove(((Cercle) save).getP1());
+						this.objs.remove(((Cercle) save).getCentre());
+					}
+					else if(save instanceof Ellipse){
+						save=(Ellipse)save;
+						this.objs.remove(((Ellipse) save).getP1());
+						this.objs.remove(((Ellipse) save).getP2());
+						this.objs.remove(((Ellipse) save).getCentre());
+					}
+					//forcer la suppression
+					ArrayList<GeoObject>	ob = new ArrayList<GeoObject>();
+					for(int i=0;i<this.objs.size();i++){
+						if(this.objs.get(i)!=select){
+							ob.add(this.objs.get(i));
+						}
+					}
+					this.objs=ob;
+						this.ecrireConsole("SUPPRESSION realise avec succes");
+					
+		}
+		if(save.getOperations().isEmpty()==false){
+			save.getOperations().clear();
+		}
+		this.select=null;
 	}
 	
 
@@ -313,14 +459,22 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             Point p=new Point(0,0,this);
             Droite droite=new Droite(p,90,this);
             Droite droite2=new Droite(p,0,this);
+            
+            try {
+				d.visitDroite(droite).setCouleur(Color.red);
+				d.visitDroite(droite2).setCouleur(Color.red);
+				
+				view.getCanvas().addGraphique(d.visitDroite(droite));
+				view.getCanvas().addGraphique(d.visitDroite(droite2));
+			} catch (VisiteurException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
             for (GeoObject o : objs) {
             	Graphique c;
 		try {
-			d.visitDroite(droite).setCouleur(Color.red);
-			d.visitDroite(droite2).setCouleur(Color.red);
 			
-			view.getCanvas().addGraphique(d.visitDroite(droite));
-			view.getCanvas().addGraphique(d.visitDroite(droite2));
 			this.repere(view.getCanvas(), d);
                     c = o.visitor(d);
                     view.getCanvas().addGraphique(c);
@@ -345,49 +499,59 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void lanceOperation(GeoObject object, Operation ope) {
             // TODO: a modifier si vous avez compris comment la fonction
             // procedais. Sinon laissez telle quel
-		for(int i=0; i < ope.getArite();i++) {
-			try {
-				String res = JOptionPane.showInputDialog(view, ope.getDescriptionArgument(i), ope.getTitle(),JOptionPane.QUESTION_MESSAGE);
-				if(res == null)
-					return;
-				if(ope.getClassArgument(i) == Double.class) {
-					ope.setArgument(i, new Double(res));
+		if(ope instanceof MediatriceOperation || ope instanceof MedianeOperation){
+			
+		}else{
+			for(int i=0; i < ope.getArite();i++) {
+				try {
+					String res = JOptionPane.showInputDialog(view, ope.getDescriptionArgument(i), ope.getTitle(),JOptionPane.QUESTION_MESSAGE);
+					if(res == null)
+						return;
+					if(ope.getClassArgument(i) == Double.class) {
+						ope.setArgument(i, new Double(res));
+					}
+					else if(ope.getClassArgument(i) == Integer.class) {
+						ope.setArgument(i, new Integer(res));
+					}
+					else if(ope.getClassArgument(i) == Character.class) {
+						ope.setArgument(i, new Character(res.charAt(0)));
+					}
+					else if(ope.getClassArgument(i) == String.class) {
+						ope.setArgument(i, new String(res));
+					}
+					else if(GeoObject.class.isAssignableFrom(ope.getClassArgument(i))) {
+						ope.setArgument(i, searchObject(res));
+					}
+					else {
+	                                    JOptionPane.showMessageDialog(view, "Classe de l'argument non supporte", "Erreur dans le lancement de l'operation", JOptionPane.ERROR_MESSAGE);
+	       				    return;
+					}
+				} catch (HeadlessException e) {
+					e.printStackTrace();
+				} catch (ArgumentOperationException e) {
+					e.printStackTrace();
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (IncorrectTypeOperationException e) {
+					e.printStackTrace();
 				}
-				else if(ope.getClassArgument(i) == Integer.class) {
-					ope.setArgument(i, new Integer(res));
-				}
-				else if(ope.getClassArgument(i) == Character.class) {
-					ope.setArgument(i, new Character(res.charAt(0)));
-				}
-				else if(ope.getClassArgument(i) == String.class) {
-					ope.setArgument(i, new String(res));
-				}
-				else if(GeoObject.class.isAssignableFrom(ope.getClassArgument(i))) {
-					ope.setArgument(i, searchObject(res));
-				}
-				else {
-                                    JOptionPane.showMessageDialog(view, "Classe de l'argument non supporte", "Erreur dans le lancement de l'operation", JOptionPane.ERROR_MESSAGE);
-       				    return;
-				}
-			} catch (HeadlessException e) {
-				e.printStackTrace();
-			} catch (ArgumentOperationException e) {
-				e.printStackTrace();
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (IncorrectTypeOperationException e) {
-				e.printStackTrace();
 			}
 		}
+		
                 // Dans notre application on autorise un resultat, que nous devons
                 // interprété. Pas de resultat correspond au pointeur null
 		Object o = ope.calculer();
+		
 		if(o != null) {
                        // on a bien trouve un resultat. Mais on ne connait pas
                        // sa nature on va donc le tester
 			if(GeoObject.class.isAssignableFrom(o.getClass())) {
                             // c'est un objet analytique on l'ajoute dans notre systeme
-				addObjet((GeoObject) o);
+				//this.save=(GeoObject)o;
+				this.addObjet((GeoObject) o);
+				//this.addObjet(this.save);
+				//this.objs.add(save);
+				//this.ecrireConsole("controleur Media: "+((GeoObject) o).getControleur()+" moi: "+this);
 			}
 			else {
                             // on ne connait pas le type, donc on l'avise a l'utilisateur
@@ -467,6 +631,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void ecrireConsole(String s){
 		this.view.getTextareaConsole().setText(this.view.getTextareaConsole().getText()+"\n"+s);
 	}
+
+	
 	
 	
 }

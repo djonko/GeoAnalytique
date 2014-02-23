@@ -4,9 +4,9 @@ import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
 import geoanalytique.model.geoobject.operation.ChangeNomOperation;
-import geoanalytique.model.geoobject.operation.MediatriceOperation;
 import geoanalytique.util.Operation;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -15,10 +15,11 @@ import java.util.ArrayList;
  */
 public abstract class GeoObject {
     private static int count = 0;
-    private ArrayList<Operation> operations;
+    protected ArrayList<Operation> operations;
     
     private String name;
     private GeoAnalytiqueControleur controleur;
+    ///public ArrayList<GeoObject> GeoObjetOperation;
 
     // Ce constructeur EST INTERDIT d'utilisation
     // PAR CONSEQUENT IL NE FAUT PAS LE MODIFIER
@@ -29,18 +30,23 @@ public abstract class GeoObject {
        throw new RuntimeException("INTERDICTION D'UTILISER CE CONSTRUCTEUR!!!!") ;
     }
     
-    public GeoObject (String name,GeoAnalytiqueControleur controleur) {
+    
+
+	public GeoObject (String name,GeoAnalytiqueControleur controleur) {
         operations = new ArrayList<Operation>();
         operations.add(new ChangeNomOperation(this));
+       
         this.name=name;
         this.setControleur(controleur);
-        operations.add(new MediatriceOperation(1,this));
+        
         // TODO: a completer
     }
     
     public GeoObject (GeoAnalytiqueControleur controleur) {
         this.name = this.getClass().getSimpleName()+(count++);
         // TODO: a completer
+        operations = new ArrayList<Operation>();
+        operations.add(new ChangeNomOperation(this));
         this.setControleur(controleur);
     }
 
@@ -52,7 +58,10 @@ public abstract class GeoObject {
     
     public void modifie() {
     	// TODO: a completer
+    	
     }
+    
+    public abstract void  deplacer(double dx, double dy);
 
     public void setName (String name) {
         // TODO: a completer
@@ -69,6 +78,9 @@ public abstract class GeoObject {
 
 	public void setControleur(GeoAnalytiqueControleur controleur) {
 		this.controleur = controleur;
+	}
+	public ArrayList<Operation> getOperations() {
+		return operations;
 	}
 }
 

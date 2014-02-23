@@ -44,4 +44,10 @@ public class Triangle extends Polygone {
 		return null;
 	}
 
+	@Override
+	public void deplacer(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

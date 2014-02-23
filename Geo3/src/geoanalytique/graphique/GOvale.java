@@ -48,6 +48,7 @@ public class GOvale extends Graphique {
             // TODO: a completer
 		Color save = g.getColor();
 		g.setColor(color);
+
 		g.drawOval(x,y,w,h);
 		g.setColor(save);
 	}

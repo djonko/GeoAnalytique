@@ -81,7 +81,7 @@ public class Dessinateur implements GeoObjectVisitor<Graphique> {
 	 */
 	public Graphique visitPolygone(Polygone p) throws VisiteurException {
             // TODO: a completer
-		GCoordonnee c,c2,c3;
+		GCoordonnee c;
 		Segment s;
 		int tabx[]=null,taby[]=null,taille=0;
 		if(p instanceof Carre || p instanceof Rectangle){

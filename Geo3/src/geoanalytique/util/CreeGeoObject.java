@@ -33,6 +33,7 @@ public class CreeGeoObject {
 				else{
 					coordonnee=this.spite(valeur);
 					p=new Point(name,coordonnee[0],coordonnee[1],this.controleur);
+					this.controleur.addObjet(p);
 					arg.add(p);
 				}
 			}

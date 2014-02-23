@@ -21,8 +21,15 @@ public class OperationControleur implements ActionListener {
          * evenement survient.
          * @param owner controleur principale (contenant tous les objets)
          */
+	private GeoObject ob;
+	private Operation ope;
+	private GeoAnalytiqueControleur controleur;
+	
         public OperationControleur(GeoObject o, Operation ope, GeoAnalytiqueControleur owner) {
             // TODO: a completer
+        	this.setOb(o);
+        	this.setOpe(ope);
+        	this.setControleur(owner);
 	}
 
         
@@ -33,6 +40,37 @@ public class OperationControleur implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO: a completer
+		this.controleur.lanceOperation(this.ob,this.ope);
+	}
+
+
+	public Operation getOpe() {
+		return ope;
+	}
+
+
+	public void setOpe(Operation ope) {
+		this.ope = ope;
+	}
+
+
+	public GeoObject getOb() {
+		return ob;
+	}
+
+
+	public void setOb(GeoObject ob) {
+		this.ob = ob;
+	}
+
+
+	public GeoAnalytiqueControleur getControleur() {
+		return controleur;
+	}
+
+
+	public void setControleur(GeoAnalytiqueControleur controleur) {
+		this.controleur = controleur;
 	}
 
 }

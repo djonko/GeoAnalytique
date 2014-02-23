@@ -36,7 +36,7 @@ public interface Operation {
      * @param num: numero de l'argument défini dans le type
      * @return Renvoie la classe de l'argument <i>num</i>
      */
-    Class getClassArgument(int num);
+    Class<?> getClassArgument(int num);
     
     /**
      * Cette fonction est lancee une fois lorsque tous les arguments ont ete defini.

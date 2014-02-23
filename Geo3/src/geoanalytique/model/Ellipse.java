@@ -104,4 +104,10 @@ public class Ellipse extends Surface {
 	public void setP2(Point p2) {
 		this.p2 = p2;
 	}
+
+	@Override
+	public void deplacer(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
 }

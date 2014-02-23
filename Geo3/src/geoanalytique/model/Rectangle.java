@@ -77,4 +77,10 @@ public class Rectangle extends Polygone{
 		return min;
 	}
 
+	@Override
+	public void deplacer(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -8,9 +8,10 @@ public class GPolygone extends Graphique{
 	private int tabX[];
 	private int tabY[];
 	private int nb;
+	private String[] tabStr={"A","B","C","D","E","F"};;
 	
 	public GPolygone(int x[],int y[],int nb){
-		super.color=Color.green;
+		super.color=Color.cyan;
 		tabX=x;
 		tabY=y;
 		this.setNb(nb);
@@ -21,6 +22,7 @@ public class GPolygone extends Graphique{
 		tabX=x;
 		tabY=y;
 		this.setNb(nb);
+
 	}
 	
 	@Override
@@ -29,9 +31,17 @@ public class GPolygone extends Graphique{
 		//g.drawPolygon(this.tabX,this.tabY,this.nb);
 		for(int i=0;i<tabX.length;i++){
 			if(i!=tabX.length-1){
+				g.setColor(this.getCouleur());
 				g.drawLine(tabX[i],tabY[i],tabX[i+1],tabY[i+1]);
+				g.setColor(Color.red);
+				g.drawString(this.tabStr[i],tabX[i], tabY[i]);
+				g.setColor(this.getCouleur());
 			}else{
+				g.setColor(this.getCouleur());
 				g.drawLine(tabX[0],tabY[0],tabX[i],tabY[i]);
+				
+				g.setColor(Color.red);
+				g.drawString(this.tabStr[i],tabX[i], tabY[i]);
 			}
 		}
 		

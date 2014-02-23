@@ -4,6 +4,7 @@ import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
 
+import java.awt.Color;
 import java.util.Collection;
 
 /**
@@ -12,17 +13,22 @@ import java.util.Collection;
  */
 public abstract class Polygone extends Surface {
 	Collection<Point> controles;
+	public Collection<Point> getControles(){
+		return this.controles;
+	}
 	
 
     public Polygone (Collection<Point> controles,GeoAnalytiqueControleur controleur) {
     	super(controleur);
     	this.controles=controles;
+  
     	// TODO: a completer
     }
     
     public Polygone (String name,Collection<Point> controles,GeoAnalytiqueControleur controleur) {
     	super(name,controleur);
     	this.controles=controles;
+    	
         // TODO: a completer
     }
 

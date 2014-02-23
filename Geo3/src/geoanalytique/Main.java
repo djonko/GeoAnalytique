@@ -46,6 +46,10 @@ public class Main {
     	GeoAnalytiqueControleur controleur = new GeoAnalytiqueControleur(panel);
     	controleur.prepareTout();
     	
+    	
+        
+    	Point p=new Point("Ori",4,4, controleur);
+    	controleur.addObjet(p);
     	/*
     	Point p=new Point("Ori",4,4, controleur);
         Point p2=new Point("Ori",4,7, controleur);
@@ -84,6 +88,27 @@ public class Main {
         System.out.println(" la pente"+mil.pente);
         controleur.addObjet(p);
         controleur.addObjet(p2);
+        
+        
+        //pour un segment
+        Point p=new Point("Ori",2,2, controleur);
+        Point p2=new Point("Ori",4,6, controleur);
+        Segment s=new Segment(p,p2,controleur);
+        Droite mil=(Droite) (new MediatriceOperation(s)).calculer();
+        controleur.addObjet(s);
+        controleur.addObjet(mil);
+        
+        //pour triangle
+           ArrayList<Point> ct=new ArrayList<Point>();
+        ct.add(new Point(2,2,controleur));
+        ct.add(new Point(2,6,controleur));
+        ct.add(new Point(6,6,controleur));
+        
+        Polygone PP=new Triangle(ct,controleur);
+        Droite mediane =(Droite)(new MedianeOperation(3,PP)).calculer();
+        controleur.addObjet(PP);
+        controleur.addObjet(mediane);
+         
         */
     	
     	frame.setVisible(true);

@@ -33,6 +33,13 @@ public class Droite extends GeoObject {
     	this.p=p;
     	
     }
+    public Droite(String Name,Point p, double pente,GeoAnalytiqueControleur controleur) {
+        // TODO: a completer
+    	super(Name,controleur);//a completer
+    	this.pente=pente;
+    	this.p=p;
+    	
+    }
     
     @Override
     public boolean equals(Object o) {
@@ -53,6 +60,12 @@ public class Droite extends GeoObject {
 	public boolean contient(Point p) {
             // TODO: a completer
 		return (this.p.calculPente(p)==this.pente)?true:false;
+		
+	}
+
+	@Override
+	public void deplacer(double dx, double dy) {
+		this.p.deplacer(dx, dy);
 		
 	}
 	

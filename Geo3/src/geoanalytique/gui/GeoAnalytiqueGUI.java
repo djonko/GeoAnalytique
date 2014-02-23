@@ -25,7 +25,7 @@ public class GeoAnalytiqueGUI extends JPanel {
 // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnCarre;
    private javax.swing.JButton btnZomPlus;
-
+   private OperationJMenuItem operationJMenuItem;
 
 
 
@@ -93,7 +93,7 @@ private javax.swing.JButton btnZomMoin;
        
        panelGrille=new JPanel();
        grille = new GeoAnalytiqueView();
-       
+       operationJMenuItem=new OperationJMenuItem();
      
        
        tablepanelGauche = new javax.swing.JTabbedPane();
@@ -766,5 +766,17 @@ private javax.swing.JButton btnZomMoin;
 
 	public void setPopupMenu(JPopupMenu popupMenu) {
 		this.popupMenu = popupMenu;
+	}
+
+
+
+	public OperationJMenuItem getOperationJMenuItem() {
+		return operationJMenuItem;
+	}
+
+
+
+	public void setOperationJMenuItem(OperationJMenuItem operationJMenuItem) {
+		this.operationJMenuItem = operationJMenuItem;
 	}
 }

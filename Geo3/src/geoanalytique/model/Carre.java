@@ -62,7 +62,7 @@ public class Carre extends Polygone{
 	private Point plusGrand(){
 		Point max=((ArrayList<Point>) this.controles).get(0);
 		for(Point p: this.controles){
-			if(p.getX()>max.getX() &&p.getY()>max.getY()){
+			if(p.getX()>max.getX() && p.getY()>max.getY()){
 				max=p;
 			}
 		}
@@ -76,6 +76,16 @@ public class Carre extends Polygone{
 			}
 		}
 		return min;
+	}
+
+	@Override
+	public void deplacer(double dx, double dy) {
+		// TODO Auto-generated me
+		this.getSegment(1).deplacer(dx, dy);
+		this.getSegment(2).deplacer(dx, dy);
+		this.getSegment(3).deplacer(dx, dy);
+		this.getSegment(4).deplacer(dx, dy);
+		
 	}
 
 }

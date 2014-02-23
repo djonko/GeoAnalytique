@@ -34,6 +34,7 @@ public class MedianeOperation implements Operation{
 		
 	}
 
+	
 	@Override
 	public Class getClassArgument(int num) {
 		// TODO Auto-generated method stub
@@ -46,9 +47,7 @@ public class MedianeOperation implements Operation{
 		Point p=this.trgl.getSegment(1).getP1();
 		Point mil=this.trgl.getSegment(2).getP1().milieuDeuxPoint(this.trgl.getSegment(2).getP2());
 		double pente=mil.calculPente(p);
-		//return new Droite(p,pente,this.trgl.getControleur());
-		
-		return new Segment(p,mil,this.trgl.getControleur());
+		return new Droite(p,-pente,this.trgl.getControleur());
 	}
 
 	@Override
