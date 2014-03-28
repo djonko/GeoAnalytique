@@ -60,6 +60,8 @@ public abstract class GeoObject {
     	// TODO: a completer
     	
     }
+    //mise a jour propriete dun object
+    public void update(){}
     
     public abstract void  deplacer(double dx, double dy);
 

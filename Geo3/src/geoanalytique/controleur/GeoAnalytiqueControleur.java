@@ -236,7 +236,13 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				if(o==this.select){
 					o.deplacer(p.getX(),p.getY());
 					this.update(select);
+					
 				}
+				
+				if(o!=this.select){
+					o.update();
+				}
+					
 			}
 		}
 		
@@ -267,13 +273,22 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		//this.ecrireConsole(""+obj.getOperations());
 		
 		if(obj!=null){
+			
+			
 			for(Operation op: obj.getOperations()){
 				if(op instanceof MediatriceOperation && obj instanceof Segment){
 					OperationControleur p=new OperationControleur(obj,op,this);
 					this.view.getOperationJMenuItem().getItemMediatrice().addActionListener(p);
-					if(this.opControleur.contains(p)==false || this.opControleur==null)
+					if(this.opControleur.contains(p)==false && this.opControleur!=null)
 						this.opControleur.add(p);
-				}	
+				}else	
+				if(op instanceof MedianeOperation && obj instanceof Triangle){
+					OperationControleur p=new OperationControleur(obj,op,this);
+					this.view.getOperationJMenuItem().getItemMediane().addActionListener(p);
+					if(this.opControleur.contains(p)==false && this.opControleur!=null)
+						this.opControleur.add(p);
+				}
+				
 			}
 		}
 	}
@@ -292,7 +307,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
 			}else if(this.select instanceof Triangle){
 				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
-			
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemMediane());
 			}else if(this.select instanceof Carre){
 				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
 			}else if(this.select instanceof Rectangle){
@@ -311,51 +326,77 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		p.setY( (Math.round(p.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
 		this.ecrireConsole("la souris pointe sur P:"+p.getX()+"/"+p.getY());
 		for(GeoObject ob: this.objs){
+			this.ecrireConsole(" arrondi"+p.getX());
 				if(ob instanceof Segment){
 					Segment s=(Segment)(ob);
-					this.ecrireConsole(" arrondi"+p.getX());
+					this.ecrirePropriete("Nom figure: "+s.getName()+
+					"\n"+"Longueur ="+s.getLong()
+							);
 					if(s.contient(p)){
-						this.ecrireConsole("oui deugeu segment");
+						this.ecrireConsole("un  segment selectionne");
 						return s;
 					}
 				}else
 			if(ob instanceof Point){
 				Point pnt=(Point)(ob);
-				this.ecrireConsole(" arrondi"+p.getX());
+				this.ecrirePropriete("Nom figure: "+pnt.getName()+
+						"\n"+"position x ="+pnt.getX()+"\n"+
+						"position Y ="+pnt.getY()
+								);
 				if(pnt.contient(p)){
-					this.ecrireConsole("oui deugeu Point");
+					this.ecrireConsole("un  Point selectionne");
 					return pnt;
 				}
 			}
 			if(ob instanceof Droite){
 				Droite d=(Droite)(ob);
-				this.ecrireConsole(" arrondi"+p.getX());
+				this.ecrirePropriete("Nom figure: "+d.getName()+
+						"\n"+"La pente ="+d.pente+"\n"
+								);
 				if(d.contient(p)){
-					this.ecrireConsole("oui deugeu droite");
+					this.ecrireConsole("une droite selectionne");
 					return d;
 				}
 			}else if(ob instanceof Carre){
 				Carre c=(Carre)(ob);
+				this.ecrirePropriete("Nom figure: "+c.getName()+
+						"\n"+"L Aire ="+c.calculerAire()+"\n"+
+						"Perimetre ="+c.perimetre
+								);
 				if(c.contient(p)){
-					this.ecrireConsole("oui deugeu carre");
+					this.ecrireConsole("un carre selectionne");
 					return c;
 				}
 			}else if(ob instanceof Rectangle){
 				Rectangle c=(Rectangle)(ob);
+				this.ecrirePropriete("Nom figure: "+c.getName()+
+						"\n"+"L Aire ="+c.calculerAire()+"\n"+
+						"Perimetre ="+c.perimetre
+								);
 				if(c.contient(p)){
-					this.ecrireConsole("oui deugeu Rectangle");
+					this.ecrireConsole("un Rectangle selectionne");
 					return c;
 				}
 			}else if(ob instanceof Cercle){
 				Cercle c=(Cercle)(ob);
 				if(c.contient(p)){
-					this.ecrireConsole("oui deugeu Cercle");
+					this.ecrireConsole("un Cercle selectionne");
 					return c;
 				}
 			}else if(ob instanceof Ellipse){
 				Ellipse c=(Ellipse)(ob);
 				if(c.contient(p)){
-					this.ecrireConsole("oui deugeu Ellipse");
+					this.ecrireConsole("un Ellipse selectionne");
+					return c;
+				}
+			}else if(ob instanceof Triangle){
+				Triangle c=(Triangle)(ob);
+				this.ecrirePropriete("Nom figure: "+c.getName()+
+						"\n"+"L Aire ="+c.calculerAire()+"\n"+
+						"Perimetre ="+c.perimetre
+								);
+				if(c.contient(p)){
+					this.ecrireConsole("un triangle selectionne");
 					return c;
 				}
 			}
@@ -389,6 +430,11 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 						for(Point p: (((Polygone) save).getControles())){
 							this.objs.remove(p);
 						}
+					}else if(save instanceof Triangle){
+						save=(Triangle)save;
+						for(Point p: (((Polygone) save).getControles())){
+							this.objs.remove(p);
+						}
 					}else if(save instanceof Cercle){
 						save=(Cercle)save;
 						this.objs.remove(((Cercle) save).getP1());
@@ -401,7 +447,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 						this.objs.remove(((Ellipse) save).getCentre());
 					}
 					//forcer la suppression
-					ArrayList<GeoObject>	ob = new ArrayList<GeoObject>();
+					ArrayList<GeoObject>ob = new ArrayList<GeoObject>();
 					for(int i=0;i<this.objs.size();i++){
 						if(this.objs.get(i)!=select){
 							ob.add(this.objs.get(i));
@@ -500,7 +546,18 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             // TODO: a modifier si vous avez compris comment la fonction
             // procedais. Sinon laissez telle quel
 		if(ope instanceof MediatriceOperation || ope instanceof MedianeOperation){
-			
+			if(ope instanceof MedianeOperation){
+				try{
+					
+					String res = JOptionPane.showInputDialog(view, ope.getDescriptionArgument(0), ope.getTitle(),JOptionPane.QUESTION_MESSAGE);
+					int i=Integer.parseInt(res);
+					ope.setArgument(i,new Integer(i));
+					this.ecrireConsole(" tracer mediane du segement :"+new Integer(res));
+					
+				}catch(Exception e){
+					
+				}
+			}
 		}else{
 			for(int i=0; i < ope.getArite();i++) {
 				try {
@@ -631,7 +688,11 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	public void ecrireConsole(String s){
 		this.view.getTextareaConsole().setText(this.view.getTextareaConsole().getText()+"\n"+s);
 	}
-
+	
+	public void ecrirePropriete(String s){
+		String t="La liste des proprietes de la figure :\n";
+		this.view.getTextarePropriete().setText(t+s+"\n");
+	}
 	
 	
 	

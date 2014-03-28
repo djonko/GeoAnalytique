@@ -11,10 +11,14 @@ public class Rectangle extends Polygone{
 			GeoAnalytiqueControleur controleur) {
 		super(controles, controleur);
 		// TODO Auto-generated constructor stub
+		this.aire=this.calculerAire();
+		this.perimetre=(this.getSegment(1).getLong()+this.getSegment(2).getLong())*2;
 	}
 
 	public Rectangle(String name,Collection<Point> controles,GeoAnalytiqueControleur controleur) {
     	super(name,controles,controleur);
+    	this.aire=this.calculerAire();
+		this.perimetre=(this.getSegment(1).getLong()+this.getSegment(2).getLong())*2;
 
         // TODO: a completer
     }
@@ -82,5 +86,9 @@ public class Rectangle extends Polygone{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void update(){
+		this.aire=this.calculerAire();
+		this.perimetre=(this.getSegment(1).getLong()+this.getSegment(2).getLong())*2;
+	}
 }

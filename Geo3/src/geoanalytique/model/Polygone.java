@@ -13,6 +13,8 @@ import java.util.Collection;
  */
 public abstract class Polygone extends Surface {
 	Collection<Point> controles;
+	public double aire;
+	public double perimetre;
 	public Collection<Point> getControles(){
 		return this.controles;
 	}
@@ -39,6 +41,7 @@ public abstract class Polygone extends Surface {
             // TODO: a completer
             return false;
 	}
+	
     
     @Override
 	public <T> T visitor(GeoObjectVisitor<T> obj) throws VisiteurException {

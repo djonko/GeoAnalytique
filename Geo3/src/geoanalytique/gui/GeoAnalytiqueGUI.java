@@ -63,6 +63,8 @@ private javax.swing.JButton btnZomMoin;
    private javax.swing.JPanel panelLog;
    private javax.swing.JPanel panelOutil;
    private javax.swing.JPanel panelPropriete;
+   private javax.swing.JScrollPane jScrollPanelProprie;
+   private javax.swing.JTextArea textarePropriete;
    private javax.swing.JPanel panelgauchePro;
    private javax.swing.JTabbedPane tablepanelGauche;
    private javax.swing.JTextArea textareLog;
@@ -70,7 +72,10 @@ private javax.swing.JButton btnZomMoin;
    private javax.swing.JToolBar toolbar;
    // End of variables declaration//GEN-END:variables
 
-   private void initialisation(){
+   /**
+ * 
+ */
+private void initialisation(){
        toolbar = new javax.swing.JToolBar();
        btnCarre = new javax.swing.JButton();
        btnZomPlus=new JButton();
@@ -88,7 +93,9 @@ private javax.swing.JButton btnZomMoin;
        textareaConsole = new javax.swing.JTextArea();
        panelLog = new javax.swing.JPanel();
        jScrollPaneLog = new javax.swing.JScrollPane();
+       jScrollPanelProprie = new javax.swing.JScrollPane();
        textareLog = new javax.swing.JTextArea();
+       textarePropriete = new javax.swing.JTextArea();
        panelPropriete = new javax.swing.JPanel();
        
        panelGrille=new JPanel();
@@ -284,8 +291,17 @@ private javax.swing.JButton btnZomMoin;
        jtablePanel.addTab("Log", panelLog);
 
        panelPropriete.setBackground(new java.awt.Color(231, 234, 234));
+       panelPropriete.setLayout(new java.awt.BorderLayout());
 
-       javax.swing.GroupLayout panelProprieteLayout = new javax.swing.GroupLayout(panelPropriete);
+       textarePropriete.setColumns(20);
+       textarePropriete.setRows(5);
+       textarePropriete.setText("La liste des proprietes de la figure :\n");
+       jScrollPanelProprie.setViewportView(textarePropriete);
+
+       panelPropriete.add(jScrollPanelProprie, java.awt.BorderLayout.CENTER);
+       
+       //soit un gestionnaire border ou group
+     /*  javax.swing.GroupLayout panelProprieteLayout = new javax.swing.GroupLayout(panelPropriete);
        panelPropriete.setLayout(panelProprieteLayout);
        panelProprieteLayout.setHorizontalGroup(
            panelProprieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +310,7 @@ private javax.swing.JButton btnZomMoin;
        panelProprieteLayout.setVerticalGroup(
            panelProprieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGap(0, 84, Short.MAX_VALUE)
-       );
+       );*/
 
        jtablePanel.addTab("Propriétés", panelPropriete);
 
@@ -478,7 +494,31 @@ private javax.swing.JButton btnZomMoin;
    
    
    
-   public GeoAnalytiqueGUI() {
+   public javax.swing.JScrollPane getjScrollPanelProprie() {
+	return jScrollPanelProprie;
+}
+
+
+
+public void setjScrollPanelProprie(javax.swing.JScrollPane jScrollPanelProprie) {
+	this.jScrollPanelProprie = jScrollPanelProprie;
+}
+
+
+
+public javax.swing.JTextArea getTextarePropriete() {
+	return textarePropriete;
+}
+
+
+
+public void setTextarePropriete(javax.swing.JTextArea textarePropriete) {
+	this.textarePropriete = textarePropriete;
+}
+
+
+
+public GeoAnalytiqueGUI() {
        
    
      this.initialisation();

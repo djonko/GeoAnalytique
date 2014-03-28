@@ -12,10 +12,14 @@ public class Carre extends Polygone{
 	public Carre(Collection<Point> controles,GeoAnalytiqueControleur controleur) {
 		super(controles, controleur);
 		// TODO Auto-generated constructor stub
+		this.aire=this.calculerAire();
+		this.perimetre=this.getSegment(1).getLong()*4;
 	}
 	
 	public Carre(String name,Collection<Point> controles,GeoAnalytiqueControleur controleur) {
     	super(name,controles,controleur);
+    	this.aire=this.calculerAire();
+		this.perimetre=this.getSegment(1).getLong()*4;
     	//Collection<Point> k=controles;
     	//Collection<Point> t=new ArrayList<Point>();
         // TODO: a completer
@@ -50,12 +54,12 @@ public class Carre extends Polygone{
         // TODO: a completer
 		if((this.plusPetit().getX()<=p.getX() && this.plusGrand().getX()>=p.getX()) && (this.plusPetit().getY()<=p.getY() && this.plusGrand().getY()>=p.getY())){
 			return true;
-		}else{
+		}/*else{
 			for(int i=1;i<=4;i++){
 				if(this.getSegment(i).contient(p))
 					return true;
 			}
-		}
+		}*/
         return false;
 	}
 	
@@ -85,6 +89,11 @@ public class Carre extends Polygone{
 		this.getSegment(2).deplacer(dx, dy);
 		this.getSegment(3).deplacer(dx, dy);
 		this.getSegment(4).deplacer(dx, dy);
+		
+	}
+	public void update(){
+		this.aire=this.calculerAire();
+		this.perimetre=this.getSegment(1).getLong()*4;
 		
 	}
 

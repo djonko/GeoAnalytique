@@ -124,5 +124,8 @@ public class Segment extends Droite {
 			return e1;
 			
 	}
+	public void update(){
+		this.longueur=this.e1.calculerDistance(e2);
+	}
 }
 
