@@ -10,6 +10,10 @@ import geoanalytique.exception.VisiteurException;
  */
 public class Ellipse extends Surface {
    
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Point p1;
 	private Point p2;
 	private Point centre;

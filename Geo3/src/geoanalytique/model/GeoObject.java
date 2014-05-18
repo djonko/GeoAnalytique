@@ -6,16 +6,20 @@ import geoanalytique.exception.VisiteurException;
 import geoanalytique.model.geoobject.operation.ChangeNomOperation;
 import geoanalytique.util.Operation;
 
-import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Classe de base a tous objets geometriques
  * 
  */
-public abstract class GeoObject {
-    private static int count = 0;
-    protected ArrayList<Operation> operations;
+public abstract class GeoObject implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static int count = 0;
+    protected  ArrayList<Operation> operations;
     
     private String name;
     private GeoAnalytiqueControleur controleur;

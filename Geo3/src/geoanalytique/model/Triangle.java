@@ -2,8 +2,6 @@ package geoanalytique.model;
 
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.model.geoobject.operation.MedianeOperation;
-import geoanalytique.model.geoobject.operation.MediatriceOperation;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,12 +9,15 @@ import java.util.Collection;
 
 public class Triangle extends Polygone {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Triangle(Collection<Point> controles,
 			GeoAnalytiqueControleur controleur) {
 		super(controles, controleur);
 		this.aire=this.calculerAire();
 		this.perimetre=0;
-		// TODO Auto-generated constructor stub
 	}
 
 	public Triangle(String name,Collection<Point> controles,GeoAnalytiqueControleur controleur) {
@@ -24,12 +25,10 @@ public class Triangle extends Polygone {
     	super.operations.add(new MedianeOperation(2,this,super.getControleur()));
     	this.aire=this.calculerAire();
 		this.perimetre=0;
-        // TODO: a completer
     }
 
 	@Override
 	public Segment getSegment(int nb) {
-		// TODO Auto-generated method stub
 		switch(nb){
 		case 1:return new Segment(((ArrayList<Point>) super.controles).get(0),((ArrayList<Point>) super.controles).get(1),this.getControleur());
 		case 2:return new Segment(((ArrayList<Point>) super.controles).get(1),((ArrayList<Point>) super.controles).get(2),this.getControleur());
@@ -50,13 +49,30 @@ public class Triangle extends Polygone {
 	@Override
 	public double calculerAire() {
 		// TODO Auto-generated method stub
-		return 0;
+		Segment s1=this.getSegment(1);
+		Double t=s1.getP1().calculerDistance(this.getSegment(2).getP2());
+		Double t2=s1.getLong()*t;
+		return t2 / 2;
+	}
+	
+	public double calculerPerimatre() {
+		// TODO Auto-generated method stub
+		Segment s1=this.getSegment(1);
+		Segment s2=this.getSegment(2);
+		Segment s3=this.getSegment(3);
+		Double p=s1.getLong()+s2.getLong()+s3.getLong();
+		return p;
 	}
 
 	@Override
 	public Point calculerCentreGravite() {
-		// TODO Auto-generated method stub
-		return null;
+		double zx=0;
+		double zy=0;
+		for(Point p:this.controles){
+			zx+=p.getX();zy+=p.getY();
+		}
+		zx=zx/3;zy=zy/3;
+		return new Point(zx, zy,null);
 	}
 
 	@Override

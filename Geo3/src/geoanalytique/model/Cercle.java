@@ -8,8 +8,14 @@ import geoanalytique.util.GeoObjectVisitor;
  * Modele mathematique pour les cercles.
  * 
  */
+
 public class Cercle extends Ellipse {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Cercle(Point c,Point p1,GeoAnalytiqueControleur controleur){
 		super(c,p1,new Point((p1.getY()-c.getY())+c.getX(),c.getY(),controleur),controleur);
 		
@@ -35,4 +41,14 @@ public class Cercle extends Ellipse {
         else
             return false;
 	}
+	public double perimetre(){
+		
+		return 2 * Math.PI * this.getP1().calculerDistance(this.getCentre());
+	}
+	
+	public double calculerAire(){
+	return super.aire= this.getP1().calculerDistance(this.getCentre())*this.getP1().calculerDistance(this.getCentre())*Math.PI ;
+	}
+	
+	
 }

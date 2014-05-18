@@ -1,9 +1,10 @@
 package geoanalytique.gui;
 
 import javax.swing.*;
-import javax.swing.table.*;
 
 
+
+@SuppressWarnings("serial")
 public class containerPropriete extends JPanel{
 
 	/**
@@ -22,36 +23,13 @@ public class containerPropriete extends JPanel{
 
     private void initComponents() {
 
-        jscrolChamp = new javax.swing.JScrollPane();
-        jtableChamp = new javax.swing.JTable();
-        annulerBtn = new javax.swing.JButton();
-        validerBtn = new javax.swing.JButton();
-       /* data =new Object [][] {
-                {"nom","carre1"},
-                {"Point1 x/y","2/2"},
-                {"point2 x/y","2/6"},
-                {"point3 x/y","6/6"},
-                {"poit4 x/y", "6/2"}
-            };
-        tilte=new String [] {
-                "champs", "Valeurs"
-            };
-        jtableChamp.setModel(new DefaultTableModel(data,tilte));
-        jscrolChamp.setViewportView(jtableChamp);
-	*/
+        jscrolChamp = new JScrollPane();
+        jtableChamp = new JTable();
+        annulerBtn = new JButton();
+        validerBtn = new JButton();
         annulerBtn.setText("Annuler");
-        annulerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                annulerBtnActionPerformed(evt);
-            }
-        });
-
         validerBtn.setText("Valider");
-        validerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validerBtnActionPerformed(evt);
-            }
-        });
+
 
         javax.swing.GroupLayout panelProprieteContainerLayout = new javax.swing.GroupLayout(this);
         this.setLayout(panelProprieteContainerLayout);
@@ -80,21 +58,12 @@ public class containerPropriete extends JPanel{
         );
 
 
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void validerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_validerBtnActionPerformed
-
-    private void annulerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_annulerBtnActionPerformed
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton annulerBtn;
-    public javax.swing.JScrollPane jscrolChamp;
-    public javax.swing.JTable jtableChamp;
-    public javax.swing.JButton validerBtn;
+    public JButton annulerBtn;
+    public JScrollPane jscrolChamp;
+    public JTable jtableChamp;
+    public JButton validerBtn;
     public Object data[][];
     public String tilte[];
 }

@@ -15,6 +15,10 @@ import geoanalytique.exception.VisiteurException;
  * 
  */
 public class Segment extends Droite {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//les attributs 
 	private Point e1;
 	private Point e2;

@@ -4,7 +4,6 @@ import geoanalytique.util.GeoObjectVisitor;
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.exception.VisiteurException;
 
-import java.awt.Color;
 import java.util.Collection;
 
 /**
@@ -12,6 +11,10 @@ import java.util.Collection;
  * 
  */
 public abstract class Polygone extends Surface {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Collection<Point> controles;
 	public double aire;
 	public double perimetre;

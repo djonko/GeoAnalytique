@@ -11,6 +11,10 @@ import geoanalytique.exception.VisiteurException;
  */
 
 public class Droite extends GeoObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//les attributs
 	public double pente;
 	public Point p;

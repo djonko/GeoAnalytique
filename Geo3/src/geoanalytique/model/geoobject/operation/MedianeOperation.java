@@ -8,6 +8,10 @@ import geoanalytique.util.*;
 
 public class MedianeOperation implements Operation{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Triangle trgl;
 	private int num;
 	private GeoAnalytiqueControleur controleur;
@@ -43,6 +47,7 @@ public class MedianeOperation implements Operation{
 	}
 
 	
+
 	@Override
 	public Class getClassArgument(int num) {
 		// TODO Auto-generated method stub

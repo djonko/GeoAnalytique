@@ -7,6 +7,11 @@ import java.util.Collection;
 
 public class Rectangle extends Polygone{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Rectangle(Collection<Point> controles,
 			GeoAnalytiqueControleur controleur) {
 		super(controles, controleur);
@@ -43,12 +48,18 @@ public class Rectangle extends Polygone{
 		return c.getLong()*c2.getLong();
 	}
 
-	@Override
 	public Point calculerCentreGravite() {
 		// TODO Auto-generated method stub
-		return null;
+		double zx=0;
+		double zy=0;
+		for(Point p:controles){
+			zx+=p.getX();
+			zy+=p.getY();
+		}
+		zx=zx/4;zy=zy/4;
+		return new Point(zx, zy,null );
+		//return null;
 	}
-	
 	public boolean contient(Point p) {
         // TODO: a completer
 		if((this.plusPetit().getX()<=p.getX() && this.plusGrand().getX()>=p.getX()) && (this.plusPetit().getY()<=p.getY() && this.plusGrand().getY()>=p.getY())){

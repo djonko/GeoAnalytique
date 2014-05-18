@@ -1,5 +1,7 @@
 package geoanalytique.util;
 
+import java.io.Serializable;
+
 import geoanalytique.exception.ArgumentOperationException;
 import geoanalytique.exception.IncorrectTypeOperationException;
 
@@ -7,7 +9,7 @@ import geoanalytique.exception.IncorrectTypeOperationException;
  * Interface de base a toutes les operations possibles pour un objet GeoAnalytique
  *  
  */
-public interface Operation {
+public interface Operation extends Serializable {
 	
     /**
      * Permet d'associer un titre a l'operation courante

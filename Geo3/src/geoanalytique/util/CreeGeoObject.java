@@ -1,11 +1,10 @@
 package geoanalytique.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.gui.containerPropriete;
 import geoanalytique.model.Point;
+
+import java.util.ArrayList;
 
 public class CreeGeoObject {
 	private GeoAnalytiqueControleur controleur;
@@ -56,7 +55,7 @@ public class CreeGeoObject {
 		}
 		return t;
 	}
-	//prends en parametre 1 string et renvoie une liste de 2 element:1data 2entete, pour remplire le jtable de reation de figure
+	//prend en parametre 1 string et renvoie une liste de 2 element:1data 2entete, pour remplire le jtable de reation de figure
 	
 
 	public void donneeJtable(String figure){

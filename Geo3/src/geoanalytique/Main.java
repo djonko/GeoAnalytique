@@ -2,13 +2,12 @@ package geoanalytique;
  
 
 
-import java.util.ArrayList;
+
 
 import geoanalytique.controleur.GeoAnalytiqueControleur;
 import geoanalytique.gui.GeoAnalytiqueGUI;
 import geoanalytique.model.*;
-import geoanalytique.model.geoobject.operation.MedianeOperation;
-import geoanalytique.model.geoobject.operation.MediatriceOperation;
+
 
 import javax.swing.JFrame;
 

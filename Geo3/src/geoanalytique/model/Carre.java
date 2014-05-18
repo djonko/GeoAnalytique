@@ -7,8 +7,13 @@ import java.util.Collection;
 
 
 
+
 public class Carre extends Polygone{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Carre(Collection<Point> controles,GeoAnalytiqueControleur controleur) {
 		super(controles, controleur);
 		// TODO Auto-generated constructor stub
@@ -20,9 +25,7 @@ public class Carre extends Polygone{
     	super(name,controles,controleur);
     	this.aire=this.calculerAire();
 		this.perimetre=this.getSegment(1).getLong()*4;
-    	//Collection<Point> k=controles;
-    	//Collection<Point> t=new ArrayList<Point>();
-        // TODO: a completer
+    	
     }
 
 	@Override
@@ -48,18 +51,21 @@ public class Carre extends Polygone{
 	@Override
 	public Point calculerCentreGravite() {
 		// TODO Auto-generated method stub
-		return null;
+		double zx=0;
+		double zy=0;
+		for(Point p:controles){
+			zx+=p.getX();
+			zy+=p.getY();
+		}
+		zx= zx/4;zy=zy/4;
+		return new Point(zx, zy,null );
+		//return null;
 	}
 	public boolean contient(Point p) {
         // TODO: a completer
 		if((this.plusPetit().getX()<=p.getX() && this.plusGrand().getX()>=p.getX()) && (this.plusPetit().getY()<=p.getY() && this.plusGrand().getY()>=p.getY())){
 			return true;
-		}/*else{
-			for(int i=1;i<=4;i++){
-				if(this.getSegment(i).contient(p))
-					return true;
-			}
-		}*/
+		}
         return false;
 	}
 	

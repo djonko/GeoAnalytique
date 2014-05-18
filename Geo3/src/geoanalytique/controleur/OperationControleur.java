@@ -25,6 +25,7 @@ public class OperationControleur implements ActionListener {
 	private Operation ope;
 	private GeoAnalytiqueControleur controleur;
 	
+	
         public OperationControleur(GeoObject o, Operation ope, GeoAnalytiqueControleur owner) {
             // TODO: a completer
         	this.setOb(o);

@@ -10,234 +10,216 @@ import geoanalytique.view.GeoAnalytiqueView;
 import java.awt.Color;
 import java.awt.Container;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 
 /**
  * Classe representant l'interface graphique principale.
  * 
  * 
  */
+@SuppressWarnings("serial")
 public class GeoAnalytiqueGUI extends JPanel {
 
    private GeoAnalytiqueView grille;
    private JPanel panelGrille;
-
-// Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton btnCarre;
-   private javax.swing.JButton btnZomPlus;
+   private JButton btnCarre;
+   private JButton btnZomPlus;
    private OperationJMenuItem operationJMenuItem;
 
 
 
-private javax.swing.JButton btnZomMoin;
-   private javax.swing.JButton btnCercle;
-   private javax.swing.JButton btnDroite;
-   private javax.swing.JButton btnElipse;
-   private javax.swing.JButton btnRectangle;
-   private javax.swing.JButton btnSegment;
-   private javax.swing.JButton btnTriangle;
-   private javax.swing.JMenuItem itemCarre;
-   private javax.swing.JMenuItem itemCercle;
-   private javax.swing.JMenuItem itemDoc;
-   private javax.swing.JMenuItem itemDroite;
-   private javax.swing.JMenuItem itemInit;
-   private javax.swing.JMenuItem itemLicence;
-   private javax.swing.JMenuItem itemNouveau;
-   private javax.swing.JMenuItem itemRealiser;
-   private javax.swing.JMenuItem itemSortir;
-   private javax.swing.JMenuItem itemTheme;
-   private javax.swing.JScrollPane jScrollPaneConsole;
-   private javax.swing.JScrollPane jScrollPaneLog;
-   private javax.swing.JPopupMenu.Separator jSeparator1;
-   //private javax.swing.JPanel jpanelContainer;
-   private javax.swing.JTabbedPane jtablePanel;
+private  JButton btnZomMoin;
+   private  JButton btnCercle;
+   private  JButton btnDroite;
+   private  JButton btnElipse;
+   private  JButton btnRectangle;
+   private  JButton btnSegment;
+   private  JButton btnTriangle;
+   private  JMenuItem itemCarre;
+   private  JMenuItem itemCercle;
+   private  JMenuItem itemDoc;
+   private  JMenuItem itemDroite;
+   private  JMenuItem itemInit;
+   private  JMenuItem itemLicence;
+   private  JMenuItem itemNouveau;
+   private  JMenuItem itemRealiser;
+   private  JMenuItem itemSortir;
+   private  JMenuItem itemTheme;
+   private  JScrollPane jScrollPaneConsole;
+   private  JScrollPane jScrollPaneLog;
+   private  JPopupMenu.Separator jSeparator1;
+   //private  JPanel jpanelContainer;
+   private  JTabbedPane jtablePanel;
    private JPopupMenu popupMenu;
-   private javax.swing.JMenu menuAide;
-   private javax.swing.JMenu menuApropo;
-   public javax.swing.JMenuBar menuBar;
-   private javax.swing.JMenu menuDessin;
-   private javax.swing.JMenu menuFichier;
-   private javax.swing.JMenu menuForme;
-   private javax.swing.JMenu menuPreference;
-   private javax.swing.JPanel panelConsole;
-   private javax.swing.JPanel panelLog;
-   private javax.swing.JPanel panelOutil;
-   private javax.swing.JPanel panelPropriete;
-   private javax.swing.JScrollPane jScrollPanelProprie;
-   private javax.swing.JTextArea textarePropriete;
-   private javax.swing.JPanel panelgauchePro;
-   private javax.swing.JTabbedPane tablepanelGauche;
-   private javax.swing.JTextArea textareLog;
-   private javax.swing.JTextArea textareaConsole;
-   private javax.swing.JToolBar toolbar;
-   // End of variables declaration//GEN-END:variables
+   private  JMenu menuAide;
+   private  JMenu menuApropo;
+   public  JMenuBar menuBar;
+   private  JMenu menuDessin;
+   private  JMenu menuFichier;
+   private  JMenu menuForme;
+   private  JMenu menuPreference;
+   private  JPanel panelConsole;
+   private  JPanel panelLog;
+   private  JPanel panelOutil;
+   private  JPanel panelPropriete;
+   private  JScrollPane jScrollPanelProprie;
+   private  JTextArea textarePropriete;
+   private  JPanel panelgauchePro;
+   private  JTabbedPane tablepanelGauche;
+   private  JTextArea textareLog;
+   private  JTextArea textareaConsole;
+   private  JToolBar toolbar;
+private JMenuItem itemOpen;
+private JMenuItem itemSave;
 
-   /**
- * 
- */
+
 private void initialisation(){
-       toolbar = new javax.swing.JToolBar();
-       btnCarre = new javax.swing.JButton();
+       toolbar = new  JToolBar();
+       btnCarre = new  JButton();
        btnZomPlus=new JButton();
        btnZomMoin=new JButton();
-       btnCercle = new javax.swing.JButton();
-       btnDroite = new javax.swing.JButton();
-       btnElipse = new javax.swing.JButton();
-       btnSegment = new javax.swing.JButton();
-       btnTriangle = new javax.swing.JButton();
-       btnRectangle = new javax.swing.JButton();
-       panelOutil = new javax.swing.JPanel();
-       jtablePanel = new javax.swing.JTabbedPane();
-       panelConsole = new javax.swing.JPanel();
-       jScrollPaneConsole = new javax.swing.JScrollPane();
-       textareaConsole = new javax.swing.JTextArea();
-       panelLog = new javax.swing.JPanel();
-       jScrollPaneLog = new javax.swing.JScrollPane();
-       jScrollPanelProprie = new javax.swing.JScrollPane();
-       textareLog = new javax.swing.JTextArea();
-       textarePropriete = new javax.swing.JTextArea();
-       panelPropriete = new javax.swing.JPanel();
+       btnCercle = new  JButton();
+       btnDroite = new  JButton();
+       btnElipse = new  JButton();
+       btnSegment = new  JButton();
+       btnTriangle = new  JButton();
+       btnRectangle = new  JButton();
+       panelOutil = new  JPanel();
+       jtablePanel = new  JTabbedPane();
+       panelConsole = new  JPanel();
+       jScrollPaneConsole = new  JScrollPane();
+       textareaConsole = new  JTextArea();
+       panelLog = new  JPanel();
+       jScrollPaneLog = new  JScrollPane();
+       jScrollPanelProprie = new  JScrollPane();
+       textareLog = new  JTextArea();
+       textarePropriete = new  JTextArea();
+       panelPropriete = new  JPanel();
        
        panelGrille=new JPanel();
        grille = new GeoAnalytiqueView();
        operationJMenuItem=new OperationJMenuItem();
      
        
-       tablepanelGauche = new javax.swing.JTabbedPane();
-       panelgauchePro = new javax.swing.JPanel();
+       tablepanelGauche = new  JTabbedPane();
+       panelgauchePro = new  JPanel();
        popupMenu= new JPopupMenu();
-       menuBar = new javax.swing.JMenuBar();
-       menuFichier = new javax.swing.JMenu();
-       itemNouveau = new javax.swing.JMenuItem();
-       jSeparator1 = new javax.swing.JPopupMenu.Separator();
-       itemInit = new javax.swing.JMenuItem();
-       itemSortir = new javax.swing.JMenuItem();
-       menuForme = new javax.swing.JMenu();
-       menuDessin = new javax.swing.JMenu();
-       itemCarre = new javax.swing.JMenuItem();
-       itemCercle = new javax.swing.JMenuItem();
-       itemDroite = new javax.swing.JMenuItem();
-       menuPreference = new javax.swing.JMenu();
-       itemTheme = new javax.swing.JMenuItem();
-       menuAide = new javax.swing.JMenu();
-       itemDoc = new javax.swing.JMenuItem();
-       menuApropo = new javax.swing.JMenu();
-       itemRealiser = new javax.swing.JMenuItem();
-       itemLicence = new javax.swing.JMenuItem();
+       menuBar = new  JMenuBar();
+       menuFichier = new  JMenu();
+       itemNouveau = new  JMenuItem();
+       itemOpen = new  JMenuItem();
+       itemSave = new  JMenuItem();
+       jSeparator1 = new  JPopupMenu.Separator();
+       itemInit = new  JMenuItem();
+       itemSortir = new  JMenuItem();
+       menuForme = new  JMenu();
+       menuDessin = new  JMenu();
+       itemCarre = new  JMenuItem();
+       itemCercle = new  JMenuItem();
+       itemDroite = new  JMenuItem();
+       menuPreference = new  JMenu();
+       itemTheme = new  JMenuItem();
+       menuAide = new  JMenu();
+       itemDoc = new  JMenuItem();
+       menuApropo = new  JMenu();
+       itemRealiser = new  JMenuItem();
+       itemLicence = new  JMenuItem();
        
-       this.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 153, 255)));
-       toolbar.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBox.highlight"));
-       toolbar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1)));
+       this.setBorder( BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 153, 255)));
+       toolbar.setBackground( UIManager.getDefaults().getColor("CheckBox.highlight"));
+       toolbar.setBorder( BorderFactory.createCompoundBorder( BorderFactory.createEtchedBorder(),  BorderFactory.createEmptyBorder(1, 1, 1, 1)));
        toolbar.setFloatable(false);
        
        
        
        btnCarre.setText("Carre");
        btnCarre.setFocusable(false);
-       btnCarre.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnCarre.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnCarre.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnCarreActionPerformed(evt);
-           }
-       });
+       btnCarre.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnCarre.setVerticalTextPosition( SwingConstants.BOTTOM);
+
        toolbar.add(btnCarre);
 
        btnCercle.setText("Cercle");
        btnCercle.setFocusable(false);
-       btnCercle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnCercle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnCercle.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnCercleActionPerformed(evt);
-           }
-       });
+       btnCercle.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnCercle.setVerticalTextPosition( SwingConstants.BOTTOM);
+
        toolbar.add(btnCercle);
 
        btnDroite.setText("Droite");
        btnDroite.setFocusable(false);
-       btnDroite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnDroite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnDroite.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnDroiteActionPerformed(evt);
-           }
-       });
+       btnDroite.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnDroite.setVerticalTextPosition( SwingConstants.BOTTOM);
+
        toolbar.add(btnDroite);
 
        btnElipse.setText("Ellipse");
        btnElipse.setFocusable(false);
-       btnElipse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnElipse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnElipse.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnElipseActionPerformed(evt);
-           }
-       });
+       btnElipse.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnElipse.setVerticalTextPosition( SwingConstants.BOTTOM);
        toolbar.add(btnElipse);
 
        btnSegment.setText("Segment");
        btnSegment.setFocusable(false);
-       btnSegment.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnSegment.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnSegment.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnSegmentActionPerformed(evt);
-           }
-       });
+       btnSegment.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnSegment.setVerticalTextPosition( SwingConstants.BOTTOM);
+
        toolbar.add(btnSegment);
 
        btnTriangle.setText("Triangle");
        btnTriangle.setFocusable(false);
-       btnTriangle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnTriangle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+       btnTriangle.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnTriangle.setVerticalTextPosition( SwingConstants.BOTTOM);
        toolbar.add(btnTriangle);
 
        btnRectangle.setText("Rectangle");
        btnRectangle.setFocusable(false);
-       btnRectangle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnRectangle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnRectangle.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnRectangleActionPerformed(evt);
-           }
-       });
+       btnRectangle.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnRectangle.setVerticalTextPosition( SwingConstants.BOTTOM);
+
        toolbar.add(btnRectangle);
        
        btnZomPlus.setText("Zoom +");
        btnZomPlus.setFocusable(false);
-       btnZomPlus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnZomPlus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnZomPlus.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnCarreActionPerformed(evt);
-           }
-       });
+       btnZomPlus.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnZomPlus.setVerticalTextPosition( SwingConstants.BOTTOM);
+
        toolbar.add(btnZomPlus);
        
        btnZomMoin.setText("Zoom -");
        btnZomMoin.setFocusable(false);
-       btnZomMoin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-       btnZomMoin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-       btnZomMoin.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //btnCarreActionPerformed(evt);
-           }
-       });
+       btnZomMoin.setHorizontalTextPosition( SwingConstants.CENTER);
+       btnZomMoin.setVerticalTextPosition( SwingConstants.BOTTOM);
        toolbar.add(btnZomMoin);
        
-       panelOutil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+       panelOutil.setBorder( BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
        
        //ajoute des element aux differents panel
        
-       javax.swing.GroupLayout panelOutilLayout = new javax.swing.GroupLayout(panelOutil);
+        GroupLayout panelOutilLayout = new  GroupLayout(panelOutil);
        panelOutil.setLayout(panelOutilLayout);
        panelOutilLayout.setHorizontalGroup(
-           panelOutilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelOutilLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGap(0, 179, Short.MAX_VALUE)
        );
        panelOutilLayout.setVerticalGroup(
-           panelOutilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelOutilLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGap(0, 0, Short.MAX_VALUE)
        );
 
@@ -248,19 +230,19 @@ private void initialisation(){
        textareaConsole.setText("Console GeoAnalytique v1.0 !!! \n");
        jScrollPaneConsole.setViewportView(textareaConsole);
 
-       javax.swing.GroupLayout panelConsoleLayout = new javax.swing.GroupLayout(panelConsole);
+        GroupLayout panelConsoleLayout = new  GroupLayout(panelConsole);
        panelConsole.setLayout(panelConsoleLayout);
        panelConsoleLayout.setHorizontalGroup(
-           panelConsoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelConsoleLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGroup(panelConsoleLayout.createSequentialGroup()
-               .addComponent(jScrollPaneConsole, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
+               .addComponent(jScrollPaneConsole,  GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
                .addContainerGap())
        );
        panelConsoleLayout.setVerticalGroup(
-           panelConsoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelConsoleLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGroup(panelConsoleLayout.createSequentialGroup()
                .addContainerGap()
-               .addComponent(jScrollPaneConsole, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+               .addComponent(jScrollPaneConsole,  GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                .addContainerGap())
        );
 
@@ -272,19 +254,19 @@ private void initialisation(){
        textareLog.setRows(5);
        jScrollPaneLog.setViewportView(textareLog);
 
-       javax.swing.GroupLayout panelLogLayout = new javax.swing.GroupLayout(panelLog);
+        GroupLayout panelLogLayout = new  GroupLayout(panelLog);
        panelLog.setLayout(panelLogLayout);
        panelLogLayout.setHorizontalGroup(
-           panelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelLogLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGroup(panelLogLayout.createSequentialGroup()
                .addContainerGap()
-               .addComponent(jScrollPaneLog, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE))
+               .addComponent(jScrollPaneLog,  GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE))
        );
        panelLogLayout.setVerticalGroup(
-           panelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLogLayout.createSequentialGroup()
-               .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addComponent(jScrollPaneLog, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+           panelLogLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
+           .addGroup( GroupLayout.Alignment.TRAILING, panelLogLayout.createSequentialGroup()
+               .addContainerGap( GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(jScrollPaneLog,  GroupLayout.PREFERRED_SIZE, 62,  GroupLayout.PREFERRED_SIZE)
                .addGap(34, 34, 34))
        );
 
@@ -301,95 +283,95 @@ private void initialisation(){
        panelPropriete.add(jScrollPanelProprie, java.awt.BorderLayout.CENTER);
        
        //soit un gestionnaire border ou group
-     /*  javax.swing.GroupLayout panelProprieteLayout = new javax.swing.GroupLayout(panelPropriete);
+     /*   GroupLayout panelProprieteLayout = new  GroupLayout(panelPropriete);
        panelPropriete.setLayout(panelProprieteLayout);
        panelProprieteLayout.setHorizontalGroup(
-           panelProprieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelProprieteLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGap(0, 929, Short.MAX_VALUE)
        );
        panelProprieteLayout.setVerticalGroup(
-           panelProprieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelProprieteLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
            .addGap(0, 84, Short.MAX_VALUE)
        );*/
 
        jtablePanel.addTab("Propriétés", panelPropriete);
 
        panelGrille.setBackground(Color.WHITE);
-       panelGrille.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zone de Dessin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
-       //panelGrille.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+       panelGrille.setBorder(BorderFactory.createTitledBorder(null, "Zone de Dessin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
+       //panelGrille.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
        panelGrille.setPreferredSize(new java.awt.Dimension(544,544));
 
-       /*javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
+       /*GroupLayout panelGrilleLayout = new GroupLayout(panelGrille);
        panelGrille.setLayout(panelGrilleLayout);
        panelGrilleLayout.setHorizontalGroup(
-           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelGrilleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
            .addGap(0, 688, Short.MAX_VALUE)
        );
        panelGrilleLayout.setVerticalGroup(
-           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelGrilleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
            .addGap(0, 0, Short.MAX_VALUE)
        );*/
-       javax.swing.GroupLayout panelGrilleLayout = new javax.swing.GroupLayout(panelGrille);
+       GroupLayout panelGrilleLayout = new GroupLayout(panelGrille);
        panelGrille.setLayout(panelGrilleLayout);
        panelGrilleLayout.setHorizontalGroup(
-           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGrilleLayout.createSequentialGroup()
+           panelGrilleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+           .addGroup(GroupLayout.Alignment.TRAILING, panelGrilleLayout.createSequentialGroup()
                .addContainerGap()
-               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+               .addComponent(grille, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                .addContainerGap())
        );
        panelGrilleLayout.setVerticalGroup(
-           panelGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelGrilleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
            .addGroup(panelGrilleLayout.createSequentialGroup()
-               .addComponent(grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+               .addComponent(grille, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                .addContainerGap())
        );
 
-       panelgauchePro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+       panelgauchePro.setBorder(BorderFactory.createEtchedBorder());
 
-       javax.swing.GroupLayout panelgaucheProLayout = new javax.swing.GroupLayout(panelgauchePro);
+       GroupLayout panelgaucheProLayout = new GroupLayout(panelgauchePro);
        panelgauchePro.setLayout(panelgaucheProLayout);
        panelgaucheProLayout.setHorizontalGroup(
-           panelgaucheProLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelgaucheProLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
            .addGap(0, 229, Short.MAX_VALUE)
        );
        panelgaucheProLayout.setVerticalGroup(
-           panelgaucheProLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           panelgaucheProLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
            .addGap(0, 668, Short.MAX_VALUE)
        );
 
        tablepanelGauche.addTab("Propriete", panelgauchePro);
 
-       javax.swing.GroupLayout jpanelContainerLayout = new javax.swing.GroupLayout(this);
+       GroupLayout jpanelContainerLayout = new GroupLayout(this);
        this.setLayout(jpanelContainerLayout);
        jpanelContainerLayout.setHorizontalGroup(
-           jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+           jpanelContainerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+           .addComponent(toolbar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
            .addGroup(jpanelContainerLayout.createSequentialGroup()
-               .addComponent(panelOutil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-               .addGroup(jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(panelOutil, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+               .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+               .addGroup(jpanelContainerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                    .addGroup(jpanelContainerLayout.createSequentialGroup()
                        .addComponent(jtablePanel)
                        .addGap(10, 10, 10))
                    .addGroup(jpanelContainerLayout.createSequentialGroup()
-                       .addComponent(panelGrille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                       .addComponent(panelGrille, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                       .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                        .addComponent(tablepanelGauche))))
        );
        jpanelContainerLayout.setVerticalGroup(
-           jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           jpanelContainerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
            .addGroup(jpanelContainerLayout.createSequentialGroup()
-               .addComponent(toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-               .addGroup(jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(toolbar, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+               .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+               .addGroup(jpanelContainerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                    .addGroup(jpanelContainerLayout.createSequentialGroup()
-                       .addGroup(jpanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addComponent(panelGrille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
+                       .addGroup(jpanelContainerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                           .addComponent(panelGrille, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE,GroupLayout.PREFERRED_SIZE)
                            .addComponent(tablepanelGauche))
-                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                       .addComponent(jtablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                   .addComponent(panelOutil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                       .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                       .addComponent(jtablePanel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
+                   .addComponent(panelOutil, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
        );
        
        //gestion cote menu
@@ -398,28 +380,19 @@ private void initialisation(){
        menuFichier.setText("Fichier");
 
        itemNouveau.setText("Nouveau");
-       itemNouveau.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemNouveauActionPerformed(evt);
-           }
-       });
-       menuFichier.add(itemNouveau);
+       itemOpen.setText("Ouvrir");
+       itemSave.setText("Enregistrer");
+       
+       //menuFichier.add(itemNouveau);
+       menuFichier.add(itemOpen);
+       menuFichier.add(itemSave);
        menuFichier.add(jSeparator1);
 
        itemInit.setText("Initialiser");
-       itemInit.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemInitActionPerformed(evt);
-           }
-       });
        menuFichier.add(itemInit);
 
        itemSortir.setText("Sortir");
-       itemSortir.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemSortirActionPerformed(evt);
-           }
-       });
+;
        menuFichier.add(itemSortir);
        ///////////////////////////////////////////////////////////////////////////////////////////////////
        popupMenu.setBackground(new java.awt.Color(255, 255, 255));
@@ -430,31 +403,18 @@ private void initialisation(){
 
        menuDessin.setText("Dessiner");
 
-       itemCarre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+       itemCarre.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
        itemCarre.setText("Un Carré");
-       itemCarre.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemCarreActionPerformed(evt);
-           }
-       });
        menuDessin.add(itemCarre);
 
-       itemCercle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+       itemCercle.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
        itemCercle.setText("Un Cercle");
-       itemCercle.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemCercleActionPerformed(evt);
-           }
-       });
+
        menuDessin.add(itemCercle);
 
-       itemDroite.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+       itemDroite.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
        itemDroite.setText("Une Droite");
-       itemDroite.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemDroiteActionPerformed(evt);
-           }
-       });
+
        menuDessin.add(itemDroite);
 
        menuForme.add(menuDessin);
@@ -471,11 +431,7 @@ private void initialisation(){
        menuAide.setText("Aide");
 
        itemDoc.setText("Documentation");
-       itemDoc.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //itemDocActionPerformed(evt);
-           }
-       });
+
        menuAide.add(itemDoc);
 
        menuBar.add(menuAide);
@@ -494,25 +450,37 @@ private void initialisation(){
    
    
    
-   public javax.swing.JScrollPane getjScrollPanelProprie() {
+   public JScrollPane getjScrollPanelProprie() {
 	return jScrollPanelProprie;
 }
 
 
 
-public void setjScrollPanelProprie(javax.swing.JScrollPane jScrollPanelProprie) {
+public JMenuItem getItemOpen() {
+	return itemOpen;
+}
+
+
+
+public JMenuItem getItemSave() {
+	return itemSave;
+}
+
+
+
+public void setjScrollPanelProprie(JScrollPane jScrollPanelProprie) {
 	this.jScrollPanelProprie = jScrollPanelProprie;
 }
 
 
 
-public javax.swing.JTextArea getTextarePropriete() {
+public JTextArea getTextarePropriete() {
 	return textarePropriete;
 }
 
 
 
-public void setTextarePropriete(javax.swing.JTextArea textarePropriete) {
+public void setTextarePropriete(JTextArea textarePropriete) {
 	this.textarePropriete = textarePropriete;
 }
 
@@ -575,224 +543,224 @@ public GeoAnalytiqueGUI() {
 
 
 
-    public javax.swing.JButton getBtnCarre() {
+    public JButton getBtnCarre() {
     	return btnCarre;
     }
 
 
 
-    public javax.swing.JButton getBtnCercle() {
+    public JButton getBtnCercle() {
     	return btnCercle;
     }
 
 
 
-    public javax.swing.JButton getBtnDroite() {
+    public JButton getBtnDroite() {
     	return btnDroite;
     }
 
 
 
-    public javax.swing.JButton getBtnElipse() {
+    public JButton getBtnElipse() {
     	return btnElipse;
     }
 
 
 
-    public javax.swing.JButton getBtnRectangle() {
+    public JButton getBtnRectangle() {
     	return btnRectangle;
     }
 
 
 
-    public javax.swing.JButton getBtnSegment() {
+    public JButton getBtnSegment() {
     	return btnSegment;
     }
 
 
 
-    public javax.swing.JButton getBtnTriangle() {
+    public JButton getBtnTriangle() {
     	return btnTriangle;
     }
 
 
 
-    public javax.swing.JMenuItem getItemCarre() {
+    public JMenuItem getItemCarre() {
     	return itemCarre;
     }
 
 
 
-    public javax.swing.JMenuItem getItemCercle() {
+    public JMenuItem getItemCercle() {
     	return itemCercle;
     }
 
 
 
-    public javax.swing.JMenuItem getItemDoc() {
+    public JMenuItem getItemDoc() {
     	return itemDoc;
     }
 
 
 
-    public javax.swing.JMenuItem getItemDroite() {
+    public JMenuItem getItemDroite() {
     	return itemDroite;
     }
 
 
 
-    public javax.swing.JMenuItem getItemInit() {
+    public JMenuItem getItemInit() {
     	return itemInit;
     }
 
 
 
-    public javax.swing.JMenuItem getItemLicence() {
+    public JMenuItem getItemLicence() {
     	return itemLicence;
     }
 
 
 
-    public javax.swing.JMenuItem getItemNouveau() {
+    public JMenuItem getItemNouveau() {
     	return itemNouveau;
     }
 
 
 
-    public javax.swing.JMenuItem getItemRealiser() {
+    public JMenuItem getItemRealiser() {
     	return itemRealiser;
     }
 
 
 
-    public javax.swing.JMenuItem getItemSortir() {
+    public JMenuItem getItemSortir() {
     	return itemSortir;
     }
 
 
 
-    public javax.swing.JMenuItem getItemTheme() {
+    public JMenuItem getItemTheme() {
     	return itemTheme;
     }
 
 
 
-    public javax.swing.JScrollPane getjScrollPaneConsole() {
+    public JScrollPane getjScrollPaneConsole() {
     	return jScrollPaneConsole;
     }
 
 
 
-    public javax.swing.JScrollPane getjScrollPaneLog() {
+    public JScrollPane getjScrollPaneLog() {
     	return jScrollPaneLog;
     }
 
 
 
-    public javax.swing.JPopupMenu.Separator getjSeparator1() {
+    public JPopupMenu.Separator getjSeparator1() {
     	return jSeparator1;
     }
 
 
 
-    public javax.swing.JTabbedPane getJtablePanel() {
+    public JTabbedPane getJtablePanel() {
     	return jtablePanel;
     }
 
 
 
-    public javax.swing.JMenu getMenuAide() {
+    public JMenu getMenuAide() {
     	return menuAide;
     }
 
 
 
-    public javax.swing.JMenu getMenuApropo() {
+    public JMenu getMenuApropo() {
     	return menuApropo;
     }
 
 
 
-    public javax.swing.JMenuBar getMenuBar() {
+    public JMenuBar getMenuBar() {
     	return menuBar;
     }
 
 
 
-    public javax.swing.JMenu getMenuDessin() {
+    public JMenu getMenuDessin() {
     	return menuDessin;
     }
 
 
 
-    public javax.swing.JMenu getMenuFichier() {
+    public JMenu getMenuFichier() {
     	return menuFichier;
     }
 
 
 
-    public javax.swing.JMenu getMenuForme() {
+    public JMenu getMenuForme() {
     	return menuForme;
     }
 
 
 
-    public javax.swing.JMenu getMenuPreference() {
+    public JMenu getMenuPreference() {
     	return menuPreference;
     }
 
 
 
-    public javax.swing.JPanel getPanelConsole() {
+    public JPanel getPanelConsole() {
     	return panelConsole;
     }
 
 
 
-    public javax.swing.JPanel getPanelLog() {
+    public JPanel getPanelLog() {
     	return panelLog;
     }
 
 
 
-    public javax.swing.JPanel getPanelOutil() {
+    public JPanel getPanelOutil() {
     	return panelOutil;
     }
 
 
 
-    public javax.swing.JPanel getPanelPropriete() {
+    public JPanel getPanelPropriete() {
     	return panelPropriete;
     }
 
 
 
-    public javax.swing.JPanel getPanelgauchePro() {
+    public JPanel getPanelgauchePro() {
     	return panelgauchePro;
     }
 
 
 
-    public javax.swing.JTextArea getTextareLog() {
+    public JTextArea getTextareLog() {
     	return textareLog;
     }
 
 
 
-    public javax.swing.JTextArea getTextareaConsole() {
+    public JTextArea getTextareaConsole() {
     	return textareaConsole;
     }
 
 
 
-    public javax.swing.JToolBar getToolbar() {
+    public JToolBar getToolbar() {
     	return toolbar;
     }
-    public javax.swing.JButton getBtnZomPlus() {
+    public JButton getBtnZomPlus() {
     	return btnZomPlus;
     }
 
-    public javax.swing.JButton getBtnZomMoin() {
+    public JButton getBtnZomMoin() {
     	return btnZomMoin;
     }
 

@@ -4,10 +4,8 @@
  */
 package geoanalytique;
 
-/**
- *
- * @author virtuel
- */
+
+@SuppressWarnings("serial")
 public class Propriete extends javax.swing.JPanel {
 
     public Propriete() {
@@ -39,18 +37,10 @@ public class Propriete extends javax.swing.JPanel {
         jscrolChamp.setViewportView(jtableChamp);
 
         annulerBtn.setText("Annuler");
-        annulerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                annulerBtnActionPerformed(evt);
-            }
-        });
+       
 
         validerBtn.setText("Valider");
-        validerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validerBtnActionPerformed(evt);
-            }
-        });
+      
 
         javax.swing.GroupLayout panelProprieteContainerLayout = new javax.swing.GroupLayout(panelProprieteContainer);
         panelProprieteContainer.setLayout(panelProprieteContainerLayout);
@@ -96,13 +86,7 @@ public class Propriete extends javax.swing.JPanel {
         );
     }
 
-    private void validerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerBtnActionPerformed
-        // TODO add your handling code here:
-    }
 
-    private void annulerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerBtnActionPerformed
-        // TODO add your handling code here:
-    }
 
    
     private javax.swing.JButton annulerBtn;

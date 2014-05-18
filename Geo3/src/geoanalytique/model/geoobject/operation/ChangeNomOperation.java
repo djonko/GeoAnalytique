@@ -12,6 +12,10 @@ import geoanalytique.util.Operation;
  */
 public class ChangeNomOperation implements Operation {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GeoObject object;
 	private transient String tmp;
 	
@@ -41,6 +45,7 @@ public class ChangeNomOperation implements Operation {
 	/**
 	 * @see geoanalytique.util.Operation#getClassArgument(int)
 	 */
+
 	public Class getClassArgument(int num) {
 		return String.class;
 	}

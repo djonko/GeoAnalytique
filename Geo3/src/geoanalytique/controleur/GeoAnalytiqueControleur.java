@@ -20,6 +20,9 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -33,19 +36,24 @@ import javax.swing.table.DefaultTableModel;
  * 
  *
  */
-public class GeoAnalytiqueControleur implements ActionListener, MouseListener, HierarchyBoundsListener ,MouseMotionListener {
+public class GeoAnalytiqueControleur implements ActionListener, MouseListener, HierarchyBoundsListener ,MouseMotionListener,Serializable {
 
-	private ArrayList<GeoObject> objs;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private transient ArrayList<GeoObject> objs;
 	private ArrayList<OperationControleur> opControleur;
-	private ViewPort viewport;
-	private GeoAnalytiqueGUI view;
+	private transient ViewPort viewport;
+	private transient GeoAnalytiqueGUI view;
 	
-	public transient GeoObject select;
-	private containerPropriete panelPropriete;
+	public  GeoObject select;
+	private transient containerPropriete panelPropriete;
 	
-	private CreeGeoObject creeGeoObject;
-	private GeoObject save;
-	private Point mouseCl;
+	private transient CreeGeoObject creeGeoObject;
+	private  GeoObject save;
+	
+	///private Point mouseCl;
 
       
 		
@@ -61,10 +69,6 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		opControleur=new ArrayList<OperationControleur>();
 		viewport = new ViewPort(view.getCanvas().getWidth(),view.getCanvas().getHeight());
 		System.out.println("largeur "+view.getCanvas().getWidth()+" hauteur "+view.getCanvas().getHeight());
-		
-		
-		
-		// TODO: A completer avec vos modifications
 		panelPropriete=new containerPropriete();
 		this.creeGeoObject=new CreeGeoObject(this);
 		
@@ -81,6 +85,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.view.getOperationJMenuItem().getItemRemove().addActionListener(this);
 		this.view.getCanvas().addMouseMotionListener(this);
 		this.view.getItemInit().addActionListener(this);
+		this.view.getItemOpen().addActionListener(this);
+		this.view.getItemSave().addActionListener(this);
 		
 		
 	}
@@ -100,6 +106,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             // TODO: a completer
 	}
 	
+	/**
+	 * cette fonction permet de faire du zoom 
+	 * @param x entier la taille du zoom 
+	 */
 	public  void zoom(int x){
 		this.view.getCanvas().clear();
 		this.view.repaint();
@@ -126,6 +136,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	}
 
 
+	/**
+	 * cette fonction permet de gerer les événements de clic sur les buttons de creation
+	 * de differentes figure
+	 * 
+	 * @param ActionEvent e
+	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO: a completer
 		if (e.getSource()==this.view.getBtnZomPlus()){
@@ -134,6 +150,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		if (e.getSource()==this.view.getBtnZomMoin()){
 			this.zoom(-30);
 		}else
+			if (e.getSource()==this.view.getItemOpen()){
+				this.restoreGeoObject();
+			}else
+				if (e.getSource()==this.view.getItemSave()){
+					this.saveGeoObject();
+				}else
 		if (e.getSource()==this.view.getBtnCarre()){
 			this.cadresaisir("carre");
 		}else
@@ -193,11 +215,16 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.view.getPanelPropriete().setVisible(true);
 		}
 	
-
+	/**
+	 * événement permettant de selectionner l'object sur lequel pointe la souris
+	 * @param MouseEvent e
+	 */
 	public void mouseClicked(MouseEvent e) {
             // a priori inutile
             // mais customisable si necessaire
 		this.select=this.selectOb(e);
+		
+		
 		/*this.mouseCl=this.viewport.convert(e.getX(),e.getY());
 		this.mouseCl.setX( (Math.round(this.mouseCl.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
 		this.mouseCl.setY( (Math.round(this.mouseCl.getY()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
@@ -224,6 +251,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		
 	}
 	
+	/**
+	 * événement permettant de deplacer les objects graphiques
+	 * @param MouseEvent e
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -308,6 +339,7 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 			}else if(this.select instanceof Triangle){
 				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
 				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemMediane());
+				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemCercleInsc());
 			}else if(this.select instanceof Carre){
 				this.view.getPopupMenu().add(this.view.getOperationJMenuItem().getItemRemove());
 			}else if(this.select instanceof Rectangle){
@@ -320,6 +352,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.view.getPopupMenu().show(e.getComponent(),e.getX(), e.getY());
 		}
 	} 
+	/**
+	 * apres clic de la souris cette function permet de faire la correspondance entre l'object selectionné
+	 * et le modéle  c.a.d si la figure est soit un carré,cercle etc..
+	 * @param e de type MouseEvent
+	 * @return GeoObject
+	 */
 	private GeoObject selectOb(MouseEvent e){
 		Point p=this.viewport.convert(e.getX(),e.getY());
 		p.setX( (Math.round(p.getX()*Math.pow(10,1)) )/ (Math.pow(10,1)) );
@@ -361,7 +399,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				Carre c=(Carre)(ob);
 				this.ecrirePropriete("Nom figure: "+c.getName()+
 						"\n"+"L Aire ="+c.calculerAire()+"\n"+
-						"Perimetre ="+c.perimetre
+						"Perimetre ="+c.perimetre+
+						"\n Centre de gravite : G.x= "+c.calculerCentreGravite().getX()+"  G.y="+c.calculerCentreGravite().getY()
 								);
 				if(c.contient(p)){
 					this.ecrireConsole("un carre selectionne");
@@ -371,7 +410,9 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				Rectangle c=(Rectangle)(ob);
 				this.ecrirePropriete("Nom figure: "+c.getName()+
 						"\n"+"L Aire ="+c.calculerAire()+"\n"+
-						"Perimetre ="+c.perimetre
+						"Perimetre ="+c.perimetre+
+						"\n Centre de gravite : G.x="+c.calculerCentreGravite().getX()+
+						"   G.y="+c.calculerCentreGravite().getY()
 								);
 				if(c.contient(p)){
 					this.ecrireConsole("un Rectangle selectionne");
@@ -379,6 +420,10 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				}
 			}else if(ob instanceof Cercle){
 				Cercle c=(Cercle)(ob);
+				this.ecrirePropriete("Nom figure: "+c.getName()+
+						"\n"+"L Aire ="+c.calculerAire()+"\n"+
+						"Perimetre ="+c.perimetre()
+								);
 				if(c.contient(p)){
 					this.ecrireConsole("un Cercle selectionne");
 					return c;
@@ -391,10 +436,13 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				}
 			}else if(ob instanceof Triangle){
 				Triangle c=(Triangle)(ob);
+				
 				this.ecrirePropriete("Nom figure: "+c.getName()+
 						"\n"+"L Aire ="+c.calculerAire()+"\n"+
-						"Perimetre ="+c.perimetre
-								);
+						"Perimetre ="+c.calculerPerimatre()+
+						"\n Centre de gravite : G.x="+c.calculerCentreGravite().getX()+
+						"   G.y="+c.calculerCentreGravite().getY()
+						);
 				if(c.contient(p)){
 					this.ecrireConsole("un triangle selectionne");
 					return c;
@@ -530,7 +578,6 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
             }
             
             view.getCanvas().repaint();
-            // TODO: a completer
             
 	}
 
@@ -557,6 +604,8 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 				}catch(Exception e){
 					
 				}
+				
+				
 			}
 		}else{
 			for(int i=0; i < ope.getArite();i++) {
@@ -667,6 +716,12 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 		this.placertablePropriete(panelPropriete);
 	}
 	
+	/**
+	 * 
+	 * permet de tracer le repere 
+	 * @param view  GeoAnalytiqueView la zone de dessin
+	 * @param d Dessinateur 
+	 */
 	private void repere(GeoAnalytiqueView view,Dessinateur d){
 		for(int i=-10;i<=9;i++){
 			Point p1=new Point(-0.2,i,this);
@@ -685,15 +740,95 @@ public class GeoAnalytiqueControleur implements ActionListener, MouseListener, H
 	}
 	
 	//ecrire dans la console
+	/**
+	 * permet d'ecrire dans la partie console du logiciel 
+	 * @param s la chaine de caractere a ecrire
+	 */
 	public void ecrireConsole(String s){
 		this.view.getTextareaConsole().setText(this.view.getTextareaConsole().getText()+"\n"+s);
 	}
 	
+	/**
+	 * permet d'ecrire une chaine de caractere dans le panel propriete du logiciel
+	 * @param s la chaine de caractere a ecrire
+	 */
 	public void ecrirePropriete(String s){
 		String t="La liste des proprietes de la figure :\n";
 		this.view.getTextarePropriete().setText(t+s+"\n");
 	}
 	
+	/**
+	 * 
+	 * permet de restorer une zone de travail enregistree 
+	 * 
+	 */
+	public void restoreGeoObject(){
+		MonFiltre mfi = new MonFiltre( 
+				   new String[]{"djk","ali","mty","mtar"},
+				   "les fichiers GeoAnalytique (*.djk, *.mtar, *.ali, *mty)");
+		JFileChooser choix = new JFileChooser();
+		choix.setDialogTitle("selectionner une sauvegarde");
+		choix.setFileFilter(mfi);
+		choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		int retour =choix.showOpenDialog(null);
+		choix.setVisible(true);
+		SaveGeoObject s;
+		if(retour == JFileChooser.APPROVE_OPTION){
+			   // des fichiers ont été choisis 
+			   // (sortie par OK)
+			   File fs=choix.getSelectedFile();
+			   if(fs!=null){
+				   s=new SaveGeoObject(fs);
+				  try {
+					ArrayList<GeoObject> t=s.restore();
+					this.objs=t;
+					this.update(this.objs.get(0));
+					System.out.println(t.get(0).getName());
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   }
+			  
+		}
+	}
 	
-	
+	/**
+	 * permet d'enregistrer une zone de travail dans un fichier  
+	 */
+	public void saveGeoObject(){
+		MonFiltre mfi = new MonFiltre( 
+				   new String[]{"djk","ali","mty","mtar"},
+				   "les fichiers GeoAnalytique (*.djk, *.mtar, *.ali, *mty)");
+		JFileChooser choix = new JFileChooser();
+		choix.setDialogTitle("selectionner un repertoire");
+		choix.setFileFilter(mfi);
+		//choix.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int retour =choix.showSaveDialog(null);
+		choix.setVisible(true);
+		if(retour == JFileChooser.APPROVE_OPTION){
+			   // des fichiers ont été choisis 
+			   // (sortie par OK)
+			File fs=choix.getSelectedFile();
+			SaveGeoObject s;
+			try {
+				fs.createNewFile();
+				s=new SaveGeoObject(fs);
+				s.save(this.objs);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(fs.getName());
+			
+			
+			
+			
+			  
+		}
+	}
+	//private Point[] tab=new Point[2];
 }

@@ -10,7 +10,11 @@ import geoanalytique.exception.VisiteurException;
  */
 // TODO: compléter les commentaires javadoc, pour toutes les fonctions publiques
 public class Point extends GeoObject {
-    private double x;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private double x;
     private double y;
     
     // En informatique il est difficile de savoir si deux flottants sont

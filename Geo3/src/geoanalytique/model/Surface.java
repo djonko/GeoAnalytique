@@ -9,7 +9,11 @@ import geoanalytique.controleur.GeoAnalytiqueControleur;
  */
 public abstract class Surface extends GeoObject {
   
-    public double perimetre;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public double perimetre;
     public double aire;
     // Ce constructeur EST INTERDIT d'utilisation
     // PAR CONSEQUENT IL NE FAUT PAS LE MODIFIER

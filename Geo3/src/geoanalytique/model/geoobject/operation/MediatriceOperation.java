@@ -10,6 +10,10 @@ import geoanalytique.model.Segment;
 import geoanalytique.util.Operation;
 
 public class MediatriceOperation implements Operation {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GeoObject obj;
 	private transient Segment s;
 	private GeoAnalytiqueControleur controleur;
